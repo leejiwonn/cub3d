@@ -1,8 +1,8 @@
 #include "parse.h"
 
-static char *set_wall_texture_path(t_parse *data, char *line, int flag)
+static char *set_wall_texture(t_parse *data, char *line, int flag)
 {
-    if (!new_array(data->texture + flag, &line))
+    if (!set_wall_texture_path(data->texture + flag, &line))
         return ("set_wall_texture_path malloc failed");
     if (*line)
         return ("invalid wall_path");
@@ -11,45 +11,45 @@ static char *set_wall_texture_path(t_parse *data, char *line, int flag)
 
 static char *set_color(t_parse *data, char *line, int flag)
 {
+    int count;
+    int color_value;
+    char *color_ptr;
     int i;
-    int tmp;
-    int tmp_color;
 
+    count = 0;
+    color_ptr = (char *)((data->color) + flag - 4);
     i = 0;
-    tmp = 0;
     while (i < 3)
     {
-        tmp_color = 0;
-        tmp += parse_atoi(&line, &tmp_color);
-        if (tmp_color > 255)
+        color_value = 0;
+        count += parse_atoi(&line, &color_value);
+        if (color_value > 255)
             return ("invalid color");
-        data->color[flag - 4] += tmp_color;
-        if (i != 2)
-            data->color[flag - 4] = data->color[flag - 4] << 8;
+        *(color_ptr + i) = color_value;
         i++;
     }
-    if (tmp != 2 || *line)
+    if (count != 2 || *line)
         return ("invalid color");
     return (0);
 }
 
 char *set_identifier(t_parse *data, char *line, int flag)
 {
-    char *save;
-    char *error;
+    char *line_cur;
+    char *error_msg;
 
-    save = line;
-    error = 0;
-    while (*line == ' ')
-        line++;
-    while (*line != ' ')
-        line++;
-    while (*line == ' ')
-        line++;
-    if (flag >= 0 && flag <= 3)
-        error = set_wall_texture_path(data, line, flag);
-    else if (flag == 4 || flag == 5)
-        error = set_color(data, line, flag);
-    free(save);
-    return (error);
+    line_cur = line;
+    error_msg = 0;
+    while (*line_cur == ' ')
+        line_cur++;
+    while (*line_cur != ' ')
+        line_cur++;
+    while (*line_cur == ' ')
+        line_cur++;
+    if (FLAG_NO <= flag && flag <= FLAG_EA)
+        error_msg = set_wall_texture(data, line_cur, flag);
+    else if (flag == FLAG_F || flag == FLAG_C)
+        error_msg = set_color(data, line_cur, flag);
+    free(line);
+    return (error_msg);
 }

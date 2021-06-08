@@ -40,13 +40,13 @@ int main_loop(t_game *game)
 
     flag = 0;
     if (game->player->key[0] == 1)
-        flag = move_ad(game->player, game->data->worldmap, 0.3);
+        flag = move_ad(game->player, game->data->map, 0.3);
     else if (game->player->key[2] == 1)
-        flag = move_ad(game->player, game->data->worldmap, -0.3);
+        flag = move_ad(game->player, game->data->map, -0.3);
     if (game->player->key[1] == 1)
-        flag = move_ws(game->player, game->data->worldmap, -0.3);
+        flag = move_ws(game->player, game->data->map, -0.3);
     else if (game->player->key[3] == 1)
-        flag = move_ws(game->player, game->data->worldmap, 0.3);
+        flag = move_ws(game->player, game->data->map, 0.3);
     if (game->player->key[4] == 1)
         flag = eyesight_lr(game->player, PIT * 1.5);
     else if (game->player->key[5] == 1)

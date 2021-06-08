@@ -1,66 +1,54 @@
 #include "main.h"
 #include "parse.h"
 
-static void ft_memset(void *s, int c, size_t n)
-{
-    size_t i;
-
-    i = 0;
-    while (i < n)
-        ((unsigned char *)s)[i++] = (unsigned char)c;
-    return (s);
-}
-
 static char init_parse(t_parse **data)
 {
     if (!(*data = malloc(sizeof(t_parse))))
         return (0);
     if (!((*data)->texture = malloc(sizeof(char *) * 5)))
         return (0);
-    if (!((*data)->worldmap = malloc(sizeof(char *) * 21)))
+    if (!((*data)->map = malloc(sizeof(char *) * 21)))
         return (0);
-    ft_memset((*data)->texture, 5, sizeof(char *));
-    ft_memset((*data)->worldmap, 21, sizeof(char *));
-    ft_memset((*data)->resol, 9, sizeof(int));
+    ft_memset((*data)->texture, 0, sizeof(char *) * 5);
+    ft_memset((*data)->map, 0, sizeof(char *) * 21);
+    ft_memset((*data)->resol, 0, sizeof(int) * 6);
+    ft_memset((*data)->color, 0, sizeof(t_color) * 2);
     (*data)->direction = 0;
-    (*data)->col_max = 20;
+    (*data)->col_end = 20;
     return (1);
 }
 
-static char *set_parse(t_parse *data, char *line, unsigned char *check)
+static char *set_parse(t_parse *data, char *line, char *flags)
 {
     int flag;
 
-    flag = check_flag(line);
-    if (*check != 0xff)
-    {
-        if (!*line)
-        {
-            free(line);
-            return (0);
-        }
-        if (flag == 7)
-            return ("invalid identifier");
-        if ((*check >> flag & 1) == 1)
-            return ("reduplication identifier");
-        *check += (unsigned int)pow(2, flag);
-        return (set_identifier(data, line, flag));
-    }
-    if (!*line && !*data->worldmap)
+    flag = get_flag(line);
+    if (flag == FLAG_NOT)
+        return ("invalid identifier");
+    if ((!*line && is_full(flags)) || (!*line && !*data->map))
     {
         free(line);
         return (0);
     }
+    if (is_full(flags))
+    {
+        if (flags[flag] == 1)
+            return ("reduplication identifier");
+        flags[flag] = 1;
+        return (set_identifier(data, line, flag));
+    }
     return (set_map(data, line));
 }
 
-char *parse(t_parse **data, char *map_path, unsigned char check)
+char *parse(t_parse **data, char *map_path)
 {
     int fd;
     int result;
     char *line;
     char *error_msg;
+    char flags[5];
 
+    ft_memset(flags, 6, sizeof(char));
     if (!init_parse(data))
         return ("init_parse failed");
     if ((fd = open(map_path, O_RDONLY)) == -1)
@@ -71,9 +59,9 @@ char *parse(t_parse **data, char *map_path, unsigned char check)
             return ("get_next_line failed");
         if (!result && !*line)
             break;
-        if ((error_msg = set_parse(*data, line, &check)))
+        if ((error_msg = set_parse(*data, line, flags)))
             return (error_msg);
     }
     free(line);
-    return (resize_map(*data, check));
+    return (resize_map(*data, is_full(flags)));
 }

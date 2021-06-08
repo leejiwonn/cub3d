@@ -3,10 +3,10 @@
 int parse_atoi(char **line, int *target)
 {
     int i;
-    int check;
+    int check_comma;
 
     i = 3;
-    check = 0;
+    check_comma = 0;
     while (**line == '0')
         (*line)++;
     while (**line >= '0' && **line <= '9' && i--)
@@ -19,36 +19,25 @@ int parse_atoi(char **line, int *target)
     if (**line == ',')
     {
         (*line)++;
-        check = 1;
+        check_comma = 1;
     }
     while (**line == ' ')
         (*line)++;
-    return (check);
+    return (check_comma);
 }
 
-static int check_length(char *line)
+int set_wall_texture_path(char **target, char **line)
 {
-    int length;
+    int i;
 
-    length = 0;
-    while (*line++)
-        length++;
-    return (length);
-}
-
-int new_array(char **target, char **line)
-{
-    int tmp;
-
-    *target = malloc(check_length(*line) + 1);
-    if (!*target)
+    if (!(*target = malloc(ft_strlen(*line) + 1)))
         return (0);
-    tmp = 0;
+    i = 0;
     while (**line && **line != ' ')
     {
-        *(*target + tmp++) = **line;
+        *(*target + i++) = **line;
         (*line)++;
     }
-    *(*target + tmp) = 0;
+    *(*target + i) = 0;
     return (1);
 }

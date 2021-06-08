@@ -66,7 +66,7 @@ char *set_game_data(t_game *game);
 
 t_texture **set_texture(void *mlx, char **list);
 void free_texture(t_texture **texture, void *mlx);
-unsigned int t_color(char *ref, int y, t_texture *texture);
+unsigned int texture_color(char *ref, int y, t_texture *texture);
 
 t_player *set_player(int *location, char dir);
 char eyesight_lr(t_player *player, double seta);

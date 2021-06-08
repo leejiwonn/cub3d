@@ -28,7 +28,6 @@ void run_game(t_game *game)
     mlx_loop(game->mlx);
 }
 
-// 예상치 못한 종료든 정상 종료든 무조건 마지막에 호출이 됨!
 void free_game(t_game *game)
 {
     if (game->texture)
@@ -52,7 +51,7 @@ char *set_game(t_game **game, char *map_path)
 
     if ((error_msg = init_game(game)))
         return (error_msg);
-    if ((error_msg = parse(&(*game)->data, map_path, 0xc0)))
+    if ((error_msg = parse(&(*game)->data, map_path)))
         return (error_msg);
     return (set_game_data(*game));
 }

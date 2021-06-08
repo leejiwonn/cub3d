@@ -6,30 +6,48 @@
 #include <math.h>
 #include <stdio.h>
 
+#define FLAG_NO 0
+#define FLAG_SO 1
+#define FLAG_WE 2
+#define FLAG_EA 3
+#define FLAG_F 4
+#define FLAG_C 5
+#define FLAG_NOT 6
+
+typedef struct s_color
+{
+    char r;
+    char g;
+    char b;
+    char a;
+} t_color;
+
 typedef struct s_parse
 {
     int resol[2]; // [0] = x, [1] = y
-    int col_size;
+    int col_index;
     int map_width;
     int location[2];
-    int color[2];
-    int col_max;
+    t_color color[2];
+    int col_end;
     char direction;
-    char **worldmap;
+    char **map;
     char **texture; // texture[0] = NO, [1] = SO, [2] = WE, [3] = EA, [4] = S
 } t_parse;
 
-char *parse(t_parse **data, char *map_path, unsigned char check);
+char *parse(t_parse **data, char *map_path);
 void free_data(t_parse *data);
-int check_flag(char *line);
+int get_flag(char *line);
+int is_full(char *flags);
+void ft_memset(void *s, int c, size_t n);
 
 char *set_map(t_parse *data, char *line);
-char *resize_map(t_parse *data, unsigned char check);
+char *resize_map(t_parse *data, int check_flags);
 char *new_chr_array(char chr, int size);
 char *map_validation(t_parse *data, int max);
 
 char *set_identifier(t_parse *data, char *line, int flag);
+int set_wall_texture_path(char **target, char **line);
 int parse_atoi(char **line, int *target);
-int new_array(char **target, char **line);
 
 #endif

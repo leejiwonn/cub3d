@@ -35,7 +35,7 @@ static char *set_elem(t_parse *data, int col, int row)
 {
     char cur;
 
-    cur = data->worldmap[col][row];
+    cur = data->map[col][row];
     if (cur == ' ' || cur == '1')
         return (0);
     else if (cur != '0')
@@ -45,9 +45,9 @@ static char *set_elem(t_parse *data, int col, int row)
         data->direction = cur;
         data->location[0] = row;
         data->location[1] = col;
-        data->worldmap[col][row] = '0';
+        data->map[col][row] = '0';
     }
-    if (!around_check(data->worldmap, col, row))
+    if (!around_check(data->map, col, row))
         return ("invalid map");
     return (0);
 }
@@ -70,12 +70,12 @@ char *map_validation(t_parse *data, int max)
     char *error;
 
     col = 0;
-    while (++col < data->col_size + 1)
+    while (++col < data->col_index + 1)
     {
         row = 0;
         while (++row < max - 1)
         {
-            if (!find_chr(" 01WENS", data->worldmap[col][row]))
+            if (!find_chr(" 01WENS", data->map[col][row]))
                 return ("invalid map");
             error = set_elem(data, col, row);
             if (error)

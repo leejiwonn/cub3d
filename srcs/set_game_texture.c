@@ -15,7 +15,7 @@ void free_texture(t_texture **texture, void *mlx)
     free(texture);
 }
 
-unsigned int t_color(char *ref, int y, t_texture *texture)
+unsigned int texture_color(char *ref, int y, t_texture *texture)
 {
     char *result;
 
