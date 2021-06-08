@@ -58,12 +58,11 @@ char *parse(t_parse **data, char *map_path, unsigned char check)
     int fd;
     int result;
     char *line;
-    char *error;
+    char *error_msg;
 
     if (!init_parse(data))
         return ("init_parse failed");
-    fd = open(map_path, O_RDONLY);
-    if (fd == -1)
+    if ((fd = open(map_path, O_RDONLY)) == -1)
         return ("invalid map path");
     while (1)
     {
@@ -71,8 +70,8 @@ char *parse(t_parse **data, char *map_path, unsigned char check)
             return ("get_next_line failed");
         if (!result && !*line)
             break;
-        if ((error = set_parse(*data, line, &check)))
-            return (error);
+        if ((error_msg = set_parse(*data, line, &check)))
+            return (error_msg);
     }
     free(map_path);
     free(line);

@@ -5,10 +5,9 @@ HEADER		= -I includes -I minilibx
 SRCS_DIR	= ./srcs
 SRCS_NAME	= main.c \
 				event_key.c \
-				game_set_data.c \
-				game_set_player.c \
-				game_set_texture.c \
-				game_utils.c \
+				set_game_data.c \
+				set_game_player.c \
+				set_game_texture.c \
 				game.c \
 				get_next_line.c \
 				get_next_line_utils.c \
