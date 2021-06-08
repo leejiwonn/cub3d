@@ -1,26 +1,27 @@
+#include "main.h"
 #include "parse.h"
+
+static void ft_memset(void *s, int c, size_t n)
+{
+    size_t i;
+
+    i = 0;
+    while (i < n)
+        ((unsigned char *)s)[i++] = (unsigned char)c;
+    return (s);
+}
 
 static char init_parse(t_parse **data)
 {
-    int i;
-    char *start;
-
     if (!(*data = malloc(sizeof(t_parse))))
         return (0);
     if (!((*data)->texture = malloc(sizeof(char *) * 5)))
         return (0);
     if (!((*data)->worldmap = malloc(sizeof(char *) * 21)))
         return (0);
-    i = 0;
-    while (i < 21)
-        *((*data)->worldmap + i++) = 0;
-    i = 0;
-    while (i < 5)
-        (*data)->texture[i++] = 0;
-    i = 0;
-    start = (char *)(*data)->resol;
-    while (i < 36)
-        *(start + i++) = 0;
+    ft_memset((*data)->texture, 5, sizeof(char *));
+    ft_memset((*data)->worldmap, 21, sizeof(char *));
+    ft_memset((*data)->resol, 9, sizeof(int));
     (*data)->direction = 0;
     (*data)->col_max = 20;
     return (1);
@@ -73,7 +74,6 @@ char *parse(t_parse **data, char *map_path, unsigned char check)
         if ((error_msg = set_parse(*data, line, &check)))
             return (error_msg);
     }
-    free(map_path);
     free(line);
     return (resize_map(*data, check));
 }

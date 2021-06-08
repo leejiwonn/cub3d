@@ -4,7 +4,8 @@ static void error_print(t_game *game, char *error_msg)
 {
     if (game)
         free_game(game);
-    printf("Error message : %s\n", error_msg);
+    printf("Error\n");
+    printf("Message : %s\n", error_msg);
     exit(1);
 }
 

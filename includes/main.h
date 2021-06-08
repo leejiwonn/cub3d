@@ -51,9 +51,9 @@ typedef struct s_game
     int bpp;
     int leng;
     int endian;
+    t_parse *data;
     t_texture **texture;
     t_player *player;
-    t_parse *data;
     t_dda *dda;
 } t_game;
 

@@ -28,10 +28,10 @@ t_texture **set_texture(void *mlx, char **list)
     int i;
     t_texture **t;
 
-    t = (t_texture **)malloc(sizeof(t_texture *) * 4);
+    t = (t_texture **)malloc(sizeof(t_texture *) * 5);
     if (!t)
         return (0);
-    i = 4;
+    i = 5;
     while (--i >= 0)
         t[i] = 0;
     while (++i < 4)
