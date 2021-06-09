@@ -1,21 +1,6 @@
 #include "parse.h"
 
-char *new_chr_array(char chr, int size)
-{
-    char *cur;
-    int i;
-
-    cur = malloc(size + 1);
-    if (!cur)
-        return (0);
-    i = 0;
-    while (i < size)
-        *(cur + i++) = chr;
-    *(cur + i) = 0;
-    return (cur);
-}
-
-static int around_check(char **map, int col, int row)
+static int check_around(char **map, int col, int row)
 {
     int i;
     int j;
@@ -31,7 +16,7 @@ static int around_check(char **map, int col, int row)
     return (1);
 }
 
-static char *set_elem(t_parse *data, int col, int row)
+static char *check_player(t_parse *data, int col, int row)
 {
     char cur;
 
@@ -43,11 +28,11 @@ static char *set_elem(t_parse *data, int col, int row)
         if (data->direction)
             return ("player reduplication error");
         data->direction = cur;
-        data->location[0] = row;
-        data->location[1] = col;
+        data->location[X] = row;
+        data->location[Y] = col;
         data->map[col][row] = '0';
     }
-    if (!around_check(data->map, col, row))
+    if (!check_around(data->map, col, row))
         return ("invalid map");
     return (0);
 }
@@ -67,7 +52,7 @@ char *map_validation(t_parse *data, int max)
 {
     int col;
     int row;
-    char *error;
+    char *error_msg;
 
     col = 0;
     while (++col < data->col_index + 1)
@@ -77,9 +62,8 @@ char *map_validation(t_parse *data, int max)
         {
             if (!find_chr(" 01WENS", data->map[col][row]))
                 return ("invalid map");
-            error = set_elem(data, col, row);
-            if (error)
-                return (error);
+            if (!(error_msg = check_player(data, col, row)))
+                return (error_msg);
         }
     }
     if (!data->direction)

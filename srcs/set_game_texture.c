@@ -1,52 +1,60 @@
 #include "main.h"
 
-void free_texture(t_texture **texture, void *mlx)
-{
-    int i;
-
-    i = 0;
-    while (texture[i])
-    {
-        if (texture[i]->image)
-            mlx_destroy_image(mlx, texture[i]->image);
-        free(texture[i]);
-        i++;
-    }
-    free(texture);
-}
-
 unsigned int texture_color(char *ref, int y, t_texture *texture)
 {
     char *result;
 
-    result = ref + (int)(y * texture->ratio[1]) * texture->leng;
+    result = ref + (int)(y * texture->ratio[1]) * texture->size_line;
     return (*(unsigned int *)result);
+}
+
+void free_texture(t_texture **texture_info, void *mlx)
+{
+    int i;
+
+    i = 0;
+    while (texture_info[i])
+    {
+        if (texture_info[i]->image)
+            mlx_destroy_image(mlx, texture_info[i]->image);
+        free(texture_info[i]);
+        i++;
+    }
+    free(texture_info);
+}
+
+static int set_texture_data(void *mlx, char *list, t_texture *texture_info)
+{
+    if (!(texture_info->image = mlx_png_file_to_image(
+              mlx, list, texture_info->len[WIDTH], texture_info->len[HEIGHT])))
+        return (0);
+    if (!(texture_info->addr = mlx_get_data_addr(
+              texture_info->image, &(texture_info->bpp),
+              &(texture_info->size_line), &(texture_info->endian))))
+        return (0);
+    return (1);
 }
 
 t_texture **set_texture(void *mlx, char **list)
 {
     int i;
-    t_texture **t;
+    t_texture **texture_info;
 
-    t = (t_texture **)malloc(sizeof(t_texture *) * 5);
-    if (!t)
+    if (!(texture_info = (t_texture **)malloc(sizeof(t_texture *) * 5)))
         return (0);
     i = 5;
     while (--i >= 0)
-        t[i] = 0;
+        texture_info[i] = 0;
     while (++i < 4)
     {
-        t[i] = malloc(sizeof(t_texture));
-        if (!t[i])
+        if (!(texture_info[i] = malloc(sizeof(t_texture))))
             return (0);
-        t[i]->image = mlx_png_file_to_image(mlx, list[i], t[i]->size, t[i]->size + 1);
-        if (!t[i]->image)
+        if (!(set_texture_data(mlx, list[i], texture_info[i])))
         {
-            free_texture(t, mlx);
+            free_texture(texture_info, mlx);
             return (0);
         }
-        t[i]->adr = mlx_get_data_addr(t[i]->image, &(t[i]->bpp), &(t[i]->leng), &(t[i]->endi));
-        t[i]->bpp /= 8;
+        texture_info[i]->bpp /= 8;
     }
-    return (t);
+    return (texture_info);
 }

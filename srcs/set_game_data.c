@@ -2,11 +2,12 @@
 
 char *set_game_data(t_game *game)
 {
-    int *display;
+    int *screen;
 
-    display = game->data->resol;
-    mlx_get_screen_size(game->mlx, &display[0], &display[1]);
-    if (!(game->window = mlx_new_window(game->mlx, display[0], display[1], "cub3d")))
+    screen = game->data->resol;
+    screen[X] = RESOL_X;
+    screen[Y] = RESOL_Y;
+    if (!(game->window = mlx_new_window(game->mlx, screen[X], screen[Y], "cub3d")))
         return ("mlx_new_window failed");
     if (!(game->texture = set_texture(game->mlx, game->data->texture)))
         return ("set_texture failed");

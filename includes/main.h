@@ -8,20 +8,24 @@
 
 #define PIT 3.14 / 180
 
+#define WIDTH 0
+#define HEIGHT 1
+#define RESOL_X 800
+#define RESOL_Y 600
+
 typedef struct s_texture
 {
     void *image;
-    char *adr;
+    char *addr;
     int bpp;
-    int leng;
-    int endi;
-    int size[2];
+    int size_line;
+    int endian;
+    int len[2];
     double ratio[2];
 } t_texture;
 
 typedef struct s_player
 {
-    double fov;
     double pos[2];
     double dir[2];
     double plane[2];
@@ -69,7 +73,7 @@ void free_texture(t_texture **texture, void *mlx);
 unsigned int texture_color(char *ref, int y, t_texture *texture);
 
 t_player *set_player(int *location, char dir);
-char eyesight_lr(t_player *player, double seta);
+char rotate_player(t_player *player, double seta);
 char move_ws(t_player *player, char **worldmap, double flag);
 char move_ad(t_player *player, char **worldmap, double flag);
 

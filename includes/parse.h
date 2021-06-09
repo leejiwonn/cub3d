@@ -6,6 +6,8 @@
 #include <math.h>
 #include <stdio.h>
 
+#define X 0
+#define Y 1
 #define FLAG_NO 0
 #define FLAG_SO 1
 #define FLAG_WE 2
@@ -27,7 +29,7 @@ typedef struct s_parse
     int resol[2]; // [0] = x, [1] = y
     int col_index;
     int map_width;
-    int location[2];
+    int location[2]; // [0] = x, [1] = y
     t_color color[2];
     int col_end;
     char direction;
@@ -43,7 +45,6 @@ void ft_memset(void *s, int c, size_t n);
 
 char *set_map(t_parse *data, char *line);
 char *resize_map(t_parse *data, int check_flags);
-char *new_chr_array(char chr, int size);
 char *map_validation(t_parse *data, int max);
 
 char *set_identifier(t_parse *data, char *line, int flag);
