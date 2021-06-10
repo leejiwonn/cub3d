@@ -53,6 +53,7 @@ int					ray_casting(t_game *game, t_player *player, t_parse *data)
 		img_data += game->bpp;
 	}
 	mlx_put_image_to_window(game->mlx, game->window, game->image, 0, 0);
+	draw_minimap(game, game->player);
 	mlx_destroy_image(game->mlx, game->image);
 	return (1);
 }

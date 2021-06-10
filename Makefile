@@ -67,3 +67,11 @@ fclean :	clean
 			$(RM) $(NAME) libmlx.dylib
 
 re :		fclean all
+
+testb:
+	make bonus
+	./$(NAME) test1.cub
+
+test:
+	make
+	./$(NAME) test1.cub

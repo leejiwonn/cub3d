@@ -33,6 +33,8 @@
 # define LEFT 4
 # define RIGHT 5
 
+# define SCALE 10
+
 typedef struct      s_texture
 {
     void            *image;
@@ -43,6 +45,15 @@ typedef struct      s_texture
     int             len[2];
     double          ratio_y;
 }                   t_texture;
+
+typedef struct      s_minimap
+{
+    int y;
+    int x;
+    unsigned int *img;
+    unsigned int *line;
+    t_texture texture;
+}                   t_minimap;
 
 typedef struct      s_player
 {
@@ -103,6 +114,7 @@ char                *get_texture_start(t_texture **texture, t_dda *dda);
 void                set_dda_value(t_dda *dda, t_player *player, int resolution, int x);
 void                hit_wall(t_dda *dda, char **map, double *pos);
 
+int			        draw_minimap(t_game *game, t_player *player);
 int                 key_press(int keycode, t_game *game);
 int                 key_release(int keycode, t_game *game);
 int                 key_exit(t_game *game);
