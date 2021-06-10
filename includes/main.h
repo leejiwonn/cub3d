@@ -6,14 +6,32 @@
 #include "mlx.h"
 #include "parse.h"
 
-#define PIT 3.14 / 180
+#define PI 3.14
+#define HALF_CYCLE 180
 
 #define UP 0
 #define DOWN 1
+#define C 1
+#define F 0
 #define WIDTH 0
 #define HEIGHT 1
 #define RESOL_X 800
 #define RESOL_Y 600
+
+#define KEY_A 0
+#define KEY_S 1
+#define KEY_D 2
+#define KEY_W 13
+#define KEY_ESC 53
+#define KEY_LEFT 123
+#define KEY_RIGHT 124
+
+#define A 0
+#define S 1
+#define D 2
+#define W 3
+#define LEFT 4
+#define RIGHT 5
 
 typedef struct s_texture
 {

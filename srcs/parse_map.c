@@ -1,22 +1,23 @@
 #include "parse.h"
 
-static int set_padding(char **map, int col_end, int map_width)
+static int set_padding(char **map, int end, int map_width)
 {
     if (!(map[0] = malloc(map_width + 1)))
     {
         free(map);
         return (0);
     }
-    map[0] = 0;
-    if (!(map[col_end - 1] = malloc(map_width + 1)))
+    map[0][map_width] = 0;
+    if (!(map[end - 1] = malloc(map_width + 1)))
     {
         free(map[0]);
         free(map);
         return (0);
     }
-    map[col_end] = 0;
+    map[end - 1][map_width] = 0;
     ft_memset(map[0], ' ', map_width);
-    ft_memset(map[col_end - 1], ' ', map_width);
+    ft_memset(map[end - 1], ' ', map_width);
+    map[end] = 0;
     return (1);
 }
 

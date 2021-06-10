@@ -21,16 +21,18 @@ static char init_parse(t_parse **data)
 static char *set_parse(t_parse *data, char *line, char *flags)
 {
     int flag;
+    int check_full;
 
     flag = get_flag(line);
-    if (flag == FLAG_NOT)
+    check_full = is_full(flags);
+    if (!check_full && flag == FLAG_NOT)
         return ("invalid identifier");
-    if ((!*line && is_full(flags)) || (!*line && !*data->map))
+    if ((!check_full && !*line) || (check_full && !*line && !*data->map))
     {
         free(line);
         return (0);
     }
-    if (is_full(flags))
+    if (!check_full)
     {
         if (flags[flag] == 1)
             return ("reduplication identifier");
@@ -46,9 +48,9 @@ char *parse(t_parse **data, char *map_path)
     int result;
     char *line;
     char *error_msg;
-    char flags[5];
+    char flags[6];
 
-    ft_memset(flags, 6, sizeof(char));
+    ft_memset(flags, 0, sizeof(char) * 6);
     if (!init_parse(data))
         return ("init_parse failed");
     if ((fd = open(map_path, O_RDONLY)) == -1)

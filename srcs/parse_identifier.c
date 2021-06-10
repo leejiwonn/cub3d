@@ -25,7 +25,7 @@ static char *set_color(t_parse *data, char *line, int flag)
         count += parse_atoi(&line, &color_value);
         if (color_value > 255)
             return ("invalid color");
-        *(color_ptr + i) = color_value;
+        *(color_ptr + i + 1) = (char)color_value;
         i++;
     }
     if (count != 2 || *line)

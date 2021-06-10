@@ -48,7 +48,7 @@ static char find_chr(const char *str, char target)
     return (0);
 }
 
-char *map_validation(t_parse *data, int max)
+char *map_validation(t_parse *data, int map_width)
 {
     int col;
     int row;
@@ -58,11 +58,11 @@ char *map_validation(t_parse *data, int max)
     while (++col < data->col_index + 1)
     {
         row = 0;
-        while (++row < max - 1)
+        while (++row < map_width - 1)
         {
             if (!find_chr(" 01WENS", data->map[col][row]))
                 return ("invalid map");
-            if (!(error_msg = check_player(data, col, row)))
+            if ((error_msg = check_player(data, col, row)))
                 return (error_msg);
         }
     }

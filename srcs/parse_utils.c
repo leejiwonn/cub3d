@@ -46,8 +46,10 @@ int is_full(char *flags)
 
     i = 0;
     while (i < 6)
+    {
         if (flags[i++] == 0)
             return (0);
+    }
     return (1);
 }
 

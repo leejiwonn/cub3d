@@ -18,6 +18,22 @@ int main(int argc, char **argv)
         error_print(0, "Invalid argument");
     if ((error_msg = set_game(&game, *(argv + 1))))
         error_print(game, error_msg);
+
+    // int i;
+    // int j;
+
+    // i = 0;
+    // while (game->data->map[i])
+    // {
+    //     j = 0;
+    //     while (game->data->map[i][j])
+    //     {
+    //         printf("%d ", game->data->map[i][j]);
+    //         j++;
+    //     }
+    //     printf("\n");
+    //     i++;
+    // }
     ray_casting(game, game->player, game->data);
     run_game(game);
 }

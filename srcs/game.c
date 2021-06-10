@@ -8,9 +8,9 @@ char *init_game(t_game **game)
         return ("mlx_init failed");
     (*game)->window = 0;
     (*game)->image = 0;
-    (*game)->adr = 0;
+    (*game)->addr = 0;
     (*game)->bpp = 0;
-    (*game)->leng = 0;
+    (*game)->size_line = 0;
     (*game)->endian = 0;
     (*game)->data = 0;
     (*game)->texture = 0;

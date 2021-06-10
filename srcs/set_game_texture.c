@@ -18,7 +18,7 @@ void free_texture(t_texture **texture_info, void *mlx)
 static int set_texture_data(void *mlx, char *list, t_texture *texture_info)
 {
     if (!(texture_info->image = mlx_png_file_to_image(
-              mlx, list, texture_info->len[WIDTH], texture_info->len[HEIGHT])))
+              mlx, list, &texture_info->len[WIDTH], &texture_info->len[HEIGHT])))
         return (0);
     if (!(texture_info->addr = mlx_get_data_addr(
               texture_info->image, &(texture_info->bpp),

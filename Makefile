@@ -12,9 +12,8 @@ SRCS_NAME	= main.c \
 				get_next_line.c \
 				get_next_line_utils.c \
 				main.c \
-				parse_identifier_utils.c \
 				parse_identifier.c \
-				parse_map_utils.c \
+				parse_map_validation.c \
 				parse_map.c \
 				parse_utils.c \
 				parse.c \

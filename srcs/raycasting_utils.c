@@ -1,18 +1,5 @@
 #include "main.h"
 
-unsigned int set_color(char **worldmap, int x, int y, int side)
-{
-    unsigned int color;
-
-    if (worldmap[x][y] == '1')
-        color = 0x00FF0000;
-    else
-        color = 0x00FFFF00;
-    if (side == 1)
-        color *= 0.5;
-    return (color);
-}
-
 void set_point(t_dda *dda, t_parse *data)
 {
     int height;
@@ -28,13 +15,13 @@ char *get_texture_start(t_texture **texture, t_dda *dda)
 {
     int pixel_offset;
 
-    dda->cur = texture[SO];
+    dda->cur = texture[FLAG_SO];
     if (!dda->side && dda->ray[X] < 0)
-        dda->cur = texture[EA];
+        dda->cur = texture[FLAG_EA];
     else if (!dda->side && dda->ray[X] > 0)
-        dda->cur = texture[WE];
+        dda->cur = texture[FLAG_WE];
     else if (dda->side == 1 && dda->ray[Y] < 0)
-        dda->cur = texture[NO];
+        dda->cur = texture[FLAG_NO];
     dda->cur->ratio_y = (double)(dda->cur->len[HEIGHT] - 1);
     dda->cur->ratio_y /= (double)(dda->point[DOWN] - dda->point[UP] + 1);
     pixel_offset = (int)(dda->wall_x * (dda->cur->len[WIDTH] - 1)) * dda->cur->bpp;

@@ -1,6 +1,6 @@
 #include "main.h"
 
-static unsigned int texture_color(char *texture_start, int y, t_texture *texture)
+static unsigned int get_texture_color(char *texture_start, int y, t_texture *texture)
 {
     char *result;
 
@@ -8,10 +8,10 @@ static unsigned int texture_color(char *texture_start, int y, t_texture *texture
     return (*(unsigned int *)result);
 }
 
-static void draw_texture(t_game *game, char *img_data, char *texture_start)
+static void draw_line_y(t_game *game, char *img_data, char *texture_start)
 {
     int y;
-    int flag;
+    int index;
     t_color *color;
     int *point;
 
@@ -21,13 +21,13 @@ static void draw_texture(t_game *game, char *img_data, char *texture_start)
     while (y < game->data->resol[Y])
     {
         if (point[UP] <= y && y <= point[DOWN])
-            *(unsigned int *)img_data = texture_color(texture_start, y - point[UP], game->dda->cur);
+            *(unsigned int *)img_data = get_texture_color(texture_start, y - point[UP], game->dda->cur);
         else
         {
-            flag = 1; // 천장 색상
+            index = C;
             if (y > point[DOWN])
-                flag = 0; //바닥 색상
-            *(unsigned int *)img_data = (unsigned int)color[flag];
+                index = F;
+            *(unsigned int *)img_data = *(unsigned int *)(color + index);
         }
         img_data += game->size_line;
         y++;
@@ -49,7 +49,7 @@ int ray_casting(t_game *game, t_player *player, t_parse *data)
         set_dda_value(game->dda, player, data->resol[X], x_cur);
         hit_wall(game->dda, data->map, player->pos);
         set_point(game->dda, data);
-        draw_texture(game, img_data, get_texture_start(game->texture, game->dda));
+        draw_line_y(game, img_data, get_texture_start(game->texture, game->dda));
         img_data += game->bpp;
     }
     mlx_put_image_to_window(game->mlx, game->window, game->image, 0, 0);

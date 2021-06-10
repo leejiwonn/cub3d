@@ -2,7 +2,6 @@ NO ./texture/stone.png
 SO ./texture/metal.png
 WE ./texture/brick.png
 EA ./texture/wood.png
-
 F 0,255,0
 C 0,255,0
 

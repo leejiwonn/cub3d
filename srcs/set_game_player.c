@@ -24,7 +24,7 @@ char move_ad(t_player *player, char **worldmap, double flag)
 
     pos = player->pos;
     dir = player->dir;
-    seta = PIT * 90;
+    seta = (PI / HALF_CYCLE) * 90;
     tmp_y = dir[Y] * cos(seta) - dir[X] * sin(seta);
     tmp_x = dir[Y] * sin(seta) + dir[X] * cos(seta);
     if (worldmap[(int)(pos[Y] + tmp_y * flag)][(int)pos[X]] != '1')
@@ -71,6 +71,6 @@ t_player *set_player(int *location, char dir)
         seta = 180;
     else if (dir == 'E')
         seta = -90;
-    rotate_player(player, seta * PIT);
+    rotate_player(player, seta * (PI / HALF_CYCLE));
     return (player);
 }
