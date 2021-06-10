@@ -1,6 +1,7 @@
 #include "main_bonus.h"
 
-static void			set_minimap_pixels(t_game *game, t_minimap *minimap, t_player *player)
+static void			set_minimap_pixels(t_game *game,
+						t_minimap *minimap, t_player *player)
 {
 	int			i;
 	int			j;
@@ -46,7 +47,8 @@ static int			draw_minimap(t_game *game, t_player *player)
 	return (1);
 }
 
-static unsigned int	get_texture_color(char *texture_start, int y, t_texture *texture)
+static unsigned int	get_texture_color(char *texture_start,
+										int y, t_texture *texture)
 {
 	char	*result;
 
@@ -67,7 +69,8 @@ static void			draw_line_y(t_game *game, char *img_data, char *texture_start)
 	while (y < game->data->resol[Y])
 	{
 		if (point[UP] <= y && y <= point[DOWN])
-			*(unsigned int *)img_data = get_texture_color(texture_start, y - point[UP], game->dda->cur);
+			*(unsigned int *)img_data = get_texture_color(
+								texture_start, y - point[UP], game->dda->cur);
 		else
 		{
 			index = C;
@@ -86,7 +89,8 @@ int					ray_casting(t_game *game, t_player *player, t_parse *data)
 	char	*img_data;
 
 	game->image = mlx_new_image(game->mlx, data->resol[X], data->resol[Y]);
-	game->addr = mlx_get_data_addr(game->image, &(game->bpp), &(game->size_line), &(game->endian));
+	game->addr = mlx_get_data_addr(game->image,
+					&(game->bpp), &(game->size_line), &(game->endian));
 	game->bpp /= 8;
 	x_cur = -1;
 	img_data = game->addr;
