@@ -1,6 +1,6 @@
 #include "main.h"
 
-static void error_print(t_game *game, char *error_msg)
+static void		error_print(t_game *game, char *error_msg)
 {
 	if (game)
 		free_game(game);
@@ -9,10 +9,10 @@ static void error_print(t_game *game, char *error_msg)
 	exit(1);
 }
 
-int main(int argc, char **argv)
+int				main(int argc, char **argv)
 {
-	t_game *game;
-	char *error_msg;
+	t_game		*game;
+	char		*error_msg;
 
 	if (argc != 2)
 		error_print(0, "Invalid argument");

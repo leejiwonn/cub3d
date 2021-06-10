@@ -1,6 +1,6 @@
 #include "main.h"
 
-int key_press(int keycode, t_game *game)
+int			key_press(int keycode, t_game *game)
 {
 	if (keycode == KEY_ESC)
 	{
@@ -16,7 +16,7 @@ int key_press(int keycode, t_game *game)
 	return (0);
 }
 
-int key_release(int keycode, t_game *game)
+int			key_release(int keycode, t_game *game)
 {
 	if (keycode >= KEY_A && keycode <= KEY_D)
 		game->player->key[keycode] = 0;
@@ -27,16 +27,16 @@ int key_release(int keycode, t_game *game)
 	return (0);
 }
 
-int key_exit(t_game *game)
+int			key_exit(t_game *game)
 {
 	free_game(game);
 	exit(0);
 	return (0);
 }
 
-int main_loop(t_game *game)
+int			main_loop(t_game *game)
 {
-	char is_active;
+	char	is_active;
 
 	is_active = 0;
 	if (game->player->key[A] == 1)

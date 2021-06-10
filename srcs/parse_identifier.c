@@ -1,8 +1,8 @@
 #include "parse.h"
 
-static int	is_png_file(char *path, int len)
+static int		is_png_file(char *path, int len)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	path += len - 4;					
@@ -20,7 +20,7 @@ static int	is_png_file(char *path, int len)
 	return (1);
 }
 
-static		char *set_wall_texture(t_parse *data, char *line, int flag)
+static char		*set_wall_texture(t_parse *data, char *line, int flag)
 {
 	int		len;
 	char	*path;
@@ -36,12 +36,12 @@ static		char *set_wall_texture(t_parse *data, char *line, int flag)
 	return (0);
 }
 
-static		char *set_color(t_parse *data, char *line, int flag)
+static char		*set_color(t_parse *data, char *line, int flag)
 {
-	int count;
-	int color_value;
-	char *color_ptr;
-	int i;
+	int		count;
+	int		color_value;
+	char	*color_ptr;
+	int		i;
 
 	count = 0;
 	color_ptr = (char *)((data->color) + flag - 4);
@@ -60,9 +60,9 @@ static		char *set_color(t_parse *data, char *line, int flag)
 	return (0);
 }
 
-int			set_wall_texture_path(char **target, char **line)
+int				set_wall_texture_path(char **target, char **line)
 {
-	int i;
+	int	i;
 
 	if (!(*target = malloc(ft_strlen(*line) + 1)))
 		return (0);
@@ -78,8 +78,8 @@ int			set_wall_texture_path(char **target, char **line)
 
 char		*set_identifier(t_parse *data, char *line, int flag)
 {
-	char *line_cur;
-	char *error_msg;
+	char	*line_cur;
+	char	*error_msg;
 
 	line_cur = line;
 	error_msg = 0;

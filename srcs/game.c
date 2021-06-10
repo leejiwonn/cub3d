@@ -1,6 +1,6 @@
 #include "main.h"
 
-char *init_game(t_game **game)
+char		*init_game(t_game **game)
 {
 	if (!(*game = malloc(sizeof(t_game))))
 		return ("game malloc failed");
@@ -19,7 +19,7 @@ char *init_game(t_game **game)
 	return (0);
 }
 
-void run_game(t_game *game)
+void		run_game(t_game *game)
 {
 	mlx_hook(game->window, 2, 0, key_press, game);
 	mlx_hook(game->window, 3, 0, key_release, game);
@@ -28,7 +28,7 @@ void run_game(t_game *game)
 	mlx_loop(game->mlx);
 }
 
-void free_game(t_game *game)
+void		free_game(t_game *game)
 {
 	if (game->texture)
 		free_texture(game->texture, game->mlx);
@@ -45,9 +45,9 @@ void free_game(t_game *game)
 	free(game);
 }
 
-char *set_game(t_game **game, char *map_path)
+char		*set_game(t_game **game, char *map_path)
 {
-	char *error_msg;
+	char	*error_msg;
 
 	if ((error_msg = init_game(game)))
 		return (error_msg);

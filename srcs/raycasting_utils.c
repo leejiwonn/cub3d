@@ -1,9 +1,9 @@
 #include "main.h"
 
-void set_point(t_dda *dda, t_parse *data)
+void	set_point(t_dda *dda, t_parse *data)
 {
-	int height;
-	int screen_height;
+	int	height;
+	int	screen_height;
 
 	height = (int)(data->resol[Y] / dda->walldist);
 	screen_height = data->resol[Y];
@@ -11,9 +11,9 @@ void set_point(t_dda *dda, t_parse *data)
 	*(dda->point + 1) = (height + screen_height) / 2;
 }
 
-char *get_texture_start(t_texture **texture, t_dda *dda)
+char	*get_texture_start(t_texture **texture, t_dda *dda)
 {
-	int pixel_offset;
+	int	pixel_offset;
 
 	dda->cur = texture[FLAG_SO];
 	if (!dda->side && dda->ray[X] < 0)
@@ -28,10 +28,10 @@ char *get_texture_start(t_texture **texture, t_dda *dda)
 	return (dda->cur->addr + pixel_offset);
 }
 
-void set_dda_value(t_dda *dda, t_player *player, int width, int x_cur)
+void	set_dda_value(t_dda *dda, t_player *player, int width, int x_cur)
 {
-	int i;
-	double x_camera;
+	int		i;
+	double	x_camera;
 
 	i = 0;
 	x_camera = 2 * x_cur / (double)width - 1;
@@ -54,9 +54,9 @@ void set_dda_value(t_dda *dda, t_player *player, int width, int x_cur)
 	dda->side = 0;
 }
 
-void hit_wall(t_dda *dda, char **map, double *pos)
+void	hit_wall(t_dda *dda, char **map, double *pos)
 {
-	int s;
+	int	s;
 
 	s = Y;
 	while (map[dda->pos_to_int[Y]][dda->pos_to_int[X]] != '1')

@@ -1,7 +1,7 @@
 #include "main.h"
 #include "parse.h"
 
-static char init_parse(t_parse **data)
+static char		init_parse(t_parse **data)
 {
 	if (!(*data = malloc(sizeof(t_parse))))
 		return (0);
@@ -18,10 +18,10 @@ static char init_parse(t_parse **data)
 	return (1);
 }
 
-static char *set_parse(t_parse *data, char *line, char *flags)
+static char		*set_parse(t_parse *data, char *line, char *flags)
 {
-	int flag;
-	int check_full;
+	int		flag;
+	int		check_full;
 
 	flag = get_flag(line);
 	check_full = is_full(flags);
@@ -42,13 +42,13 @@ static char *set_parse(t_parse *data, char *line, char *flags)
 	return (set_map(data, line));
 }
 
-char *parse(t_parse **data, char *map_path)
+char			*parse(t_parse **data, char *map_path)
 {
-	int fd;
-	int result;
-	char *line;
-	char *error_msg;
-	char flags[6];
+	int		fd;
+	int		result;
+	char	*line;
+	char	*error_msg;
+	char	flags[6];
 
 	ft_memset(flags, 0, sizeof(char) * 6);
 	if (!init_parse(data))

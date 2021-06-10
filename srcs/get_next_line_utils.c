@@ -1,8 +1,8 @@
 #include "get_next_line.h"
 
-size_t ft_strlen(const char *s)
+size_t			ft_strlen(const char *s)
 {
-	size_t count;
+	size_t		count;
 
 	count = 0;
 	while (*s++)
@@ -10,7 +10,7 @@ size_t ft_strlen(const char *s)
 	return (count);
 }
 
-char *ft_strchr(const char *s)
+char			*ft_strchr(const char *s)
 {
 	if (!s)
 		return (0);
@@ -19,10 +19,10 @@ char *ft_strchr(const char *s)
 	return ((char *)s);
 }
 
-char *ft_strdup(const char *s, size_t len)
+char			*ft_strdup(const char *s, size_t len)
 {
-	char *result;
-	size_t count;
+	char		*result;
+	size_t		count;
 
 	if (!s)
 		return (0);
@@ -35,12 +35,12 @@ char *ft_strdup(const char *s, size_t len)
 	return (result);
 }
 
-char *ft_strjoin(char *s1, char *s2)
+char			*ft_strjoin(char *s1, char *s2)
 {
-	size_t size;
-	size_t count;
-	char *result;
-	char *tmp;
+	size_t		size;
+	size_t		count;
+	char		*result;
+	char		*tmp;
 
 	if (!s1 || !s2)
 		return (0);
@@ -60,9 +60,9 @@ char *ft_strjoin(char *s1, char *s2)
 	return (result);
 }
 
-t_fdlist *ft_newfd(int fd)
+t_fdlist		*ft_newfd(int fd)
 {
-	t_fdlist *new;
+	t_fdlist	*new;
 
 	if (!(new = malloc(sizeof(t_fdlist))))
 		return (0);

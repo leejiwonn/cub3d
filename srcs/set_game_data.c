@@ -1,8 +1,8 @@
 #include "main.h"
 
-char *set_game_data(t_game *game)
+char	*set_game_data(t_game *game)
 {
-	int *screen;
+	int	*screen;
 
 	screen = game->data->resol;
 	screen[X] = RESOL_X;

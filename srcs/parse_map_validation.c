@@ -1,9 +1,9 @@
 #include "parse.h"
 
-static int check_around(char **map, int col, int row)
+static int	check_around(char **map, int col, int row)
 {
-	int i;
-	int j;
+	int	i;
+	int	j;
 
 	i = -2;
 	while (++i < 2)
@@ -16,9 +16,9 @@ static int check_around(char **map, int col, int row)
 	return (1);
 }
 
-static char *check_player(t_parse *data, int col, int row)
+static char	*check_player(t_parse *data, int col, int row)
 {
-	char cur;
+	char	cur;
 
 	cur = data->map[col][row];
 	if (cur == ' ' || cur == '1')
@@ -37,7 +37,7 @@ static char *check_player(t_parse *data, int col, int row)
 	return (0);
 }
 
-static char find_chr(const char *str, char target)
+static char	find_chr(const char *str, char target)
 {
 	while (*str)
 	{
@@ -48,11 +48,11 @@ static char find_chr(const char *str, char target)
 	return (0);
 }
 
-char *map_validation(t_parse *data, int map_width)
+char		*map_validation(t_parse *data, int map_width)
 {
-	int col;
-	int row;
-	char *error_msg;
+	int		col;
+	int		row;
+	char	*error_msg;
 
 	col = 0;
 	while (++col < data->col_index + 1)

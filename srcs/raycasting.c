@@ -1,19 +1,19 @@
 #include "main.h"
 
-static unsigned int get_texture_color(char *texture_start, int y, t_texture *texture)
+static unsigned int	get_texture_color(char *texture_start, int y, t_texture *texture)
 {
-	char *result;
+	char	*result;
 
 	result = texture_start + (int)(y * texture->ratio_y) * texture->size_line;
 	return (*(unsigned int *)result);
 }
 
-static void draw_line_y(t_game *game, char *img_data, char *texture_start)
+static void			draw_line_y(t_game *game, char *img_data, char *texture_start)
 {
-	int y;
-	int index;
-	t_color *color;
-	int *point;
+	int		y;
+	int		index;
+	t_color	*color;
+	int		*point;
 
 	y = 0;
 	point = game->dda->point;
@@ -34,10 +34,10 @@ static void draw_line_y(t_game *game, char *img_data, char *texture_start)
 	}
 }
 
-int ray_casting(t_game *game, t_player *player, t_parse *data)
+int					ray_casting(t_game *game, t_player *player, t_parse *data)
 {
-	int x_cur;
-	char *img_data;
+	int		x_cur;
+	char	*img_data;
 
 	game->image = mlx_new_image(game->mlx, data->resol[X], data->resol[Y]);
 	game->addr = mlx_get_data_addr(game->image, &(game->bpp), &(game->size_line), &(game->endian));

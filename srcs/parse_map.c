@@ -1,6 +1,6 @@
 #include "parse.h"
 
-static int set_padding(char **map, int end, int map_width)
+static int	set_padding(char **map, int end, int map_width)
 {
 	if (!(map[0] = malloc(map_width + 1)))
 	{
@@ -21,10 +21,10 @@ static int set_padding(char **map, int end, int map_width)
 	return (1);
 }
 
-static int resize_col(char ***map_ref, int col_end, int padding_size, int map_width)
+static int	resize_col(char ***map_ref, int col_end, int padding_size, int map_width)
 {
-	char **new_map;
-	int i;
+	char	**new_map;
+	int		i;
 
 	if (!(new_map = malloc(sizeof(char *) * (col_end + padding_size + 1))))
 		return (0);
@@ -44,11 +44,11 @@ static int resize_col(char ***map_ref, int col_end, int padding_size, int map_wi
 	return (1);
 }
 
-static int resize_row(char **map_ref, int col_end)
+static int	resize_row(char **map_ref, int col_end)
 {
-	char *new_row;
-	int i;
-	int j;
+	char	*new_row;
+	int		i;
+	int		j;
 
 	i = 0;
 	while (map_ref[i])
@@ -71,7 +71,7 @@ static int resize_row(char **map_ref, int col_end)
 	return (1);
 }
 
-char *resize_map(t_parse *data, int check_flags)
+char		*resize_map(t_parse *data, int check_flags)
 {
 	if (!check_flags)
 		return ("invalid identifier");
@@ -82,9 +82,9 @@ char *resize_map(t_parse *data, int check_flags)
 	return (map_validation(data, data->map_width + 2));
 }
 
-char *set_map(t_parse *data, char *line)
+char		*set_map(t_parse *data, char *line)
 {
-	int i;
+	int	i;
 
 	if (data->col_index == data->col_end)
 	{

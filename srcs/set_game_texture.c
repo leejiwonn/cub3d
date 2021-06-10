@@ -1,8 +1,8 @@
 #include "main.h"
 
-void free_texture(t_texture **texture_info, void *mlx)
+void			free_texture(t_texture **texture_info, void *mlx)
 {
-	int i;
+	int			i;
 
 	i = 0;
 	while (texture_info[i])
@@ -15,7 +15,7 @@ void free_texture(t_texture **texture_info, void *mlx)
 	free(texture_info);
 }
 
-static int set_texture_data(void *mlx, char *list, t_texture *texture_info)
+static int		set_texture_data(void *mlx, char *list, t_texture *texture_info)
 {
 	if (!(texture_info->image = mlx_png_file_to_image(
 		mlx, list, &texture_info->len[WIDTH], &texture_info->len[HEIGHT])))
@@ -27,10 +27,10 @@ static int set_texture_data(void *mlx, char *list, t_texture *texture_info)
 	return (1);
 }
 
-t_texture **set_texture(void *mlx, char **list)
+t_texture		**set_texture(void *mlx, char **list)
 {
-	int i;
-	t_texture **texture_info;
+	int			i;
+	t_texture	**texture_info;
 
 	if (!(texture_info = (t_texture **)malloc(sizeof(t_texture *) * 5)))
 		return (0);

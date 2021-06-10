@@ -1,9 +1,9 @@
 #include "main.h"
 
-char move_ws(t_player *player, char **worldmap, double flag)
+char			move_ws(t_player *player, char **worldmap, double flag)
 {
-	double *pos;
-	double *dir;
+	double	*pos;
+	double	*dir;
 
 	pos = player->pos;
 	dir = player->dir;
@@ -14,13 +14,13 @@ char move_ws(t_player *player, char **worldmap, double flag)
 	return (1);
 }
 
-char move_ad(t_player *player, char **worldmap, double flag)
+char			move_ad(t_player *player, char **worldmap, double flag)
 {
-	double tmp_x;
-	double tmp_y;
-	double seta;
-	double *pos;
-	double *dir;
+	double	tmp_x;
+	double	tmp_y;
+	double	seta;
+	double	*pos;
+	double	*dir;
 
 	pos = player->pos;
 	dir = player->dir;
@@ -34,11 +34,11 @@ char move_ad(t_player *player, char **worldmap, double flag)
 	return (1);
 }
 
-char rotate_player(t_player *player, double seta)
+char			rotate_player(t_player *player, double seta)
 {
-	double tmp;
-	double *plane;
-	double *dir;
+	double	tmp;
+	double	*plane;
+	double	*dir;
 
 	dir = player->dir;
 	plane = player->plane;
@@ -51,10 +51,10 @@ char rotate_player(t_player *player, double seta)
 	return (1);
 }
 
-t_player *set_player(int *location, char dir)
+t_player		*set_player(int *location, char dir)
 {
-	t_player *player;
-	double seta;
+	t_player	*player;
+	double		seta;
 
 	if (!(player = malloc(sizeof(t_player))))
 		return (0);

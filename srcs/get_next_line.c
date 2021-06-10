@@ -1,8 +1,8 @@
 #include "get_next_line.h"
 
-static int find_fd(int fd, t_fdlist **fdl, t_fdlist **cur)
+static int		find_fd(int fd, t_fdlist **fdl, t_fdlist **cur)
 {
-	t_fdlist *tmp;
+	t_fdlist	*tmp;
 
 	tmp = *fdl;
 	if (!*fdl)
@@ -29,10 +29,10 @@ static int find_fd(int fd, t_fdlist **fdl, t_fdlist **cur)
 	return (1);
 }
 
-static void remove_curfd(int fd, t_fdlist **fdl)
+static void		remove_curfd(int fd, t_fdlist **fdl)
 {
-	t_fdlist *pre;
-	t_fdlist *tmp;
+	t_fdlist	*pre;
+	t_fdlist	*tmp;
 
 	pre = 0;
 	tmp = *fdl;
@@ -58,11 +58,11 @@ static void remove_curfd(int fd, t_fdlist **fdl)
 	}
 }
 
-static int set_result(char **line, t_fdlist *cur, int size,
+static int		set_result(char **line, t_fdlist *cur, int size,
 					  t_fdlist **fdl)
 {
-	char *div;
-	char *tmp;
+	char		*div;
+	char		*tmp;
 
 	if (size == -1 || !(div = ft_strchr(cur->save)))
 		return (-1);
@@ -82,13 +82,13 @@ static int set_result(char **line, t_fdlist *cur, int size,
 	return (1);
 }
 
-int get_next_line(int fd, char **line)
+int				get_next_line(int fd, char **line)
 {
-	static t_fdlist *fdlist;
-	t_fdlist *cur;
-	char *buff;
-	char *tmp;
-	int size;
+	static		t_fdlist *fdlist;
+	t_fdlist	*cur;
+	char		*buff;
+	char		*tmp;
+	int			size;
 
 	if (fd < 0 || BUFFER_SIZE <= 0 || !line || !(find_fd(fd, &fdlist, &cur)) || !(buff = (char *)malloc(BUFFER_SIZE + 1)))
 		return (-1);
