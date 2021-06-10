@@ -14,13 +14,13 @@ static void			set_minimap_pixels(t_game *game,
 		while (j < minimap->x)
 		{
 			if (game->data->map[i / SCALE][j / SCALE] == ' ')
-				*minimap->line = 0x003c8dad;
+				*minimap->line = 0x0091e0f4;
 			else if (game->data->map[i / SCALE][j / SCALE] == '1')
-				*minimap->line = 0x00125d98;
+				*minimap->line = 0x000c90ad;
 			else if (game->data->map[i / SCALE][j / SCALE] == '0')
-				*minimap->line = 0x00cbd7dc;
+				*minimap->line = 0x00f8f1f9;
 			if (i / SCALE == (int)player->pos[Y] && j / SCALE == (int)player->pos[X])
-				*minimap->line = 0x00125d98;
+				*minimap->line = 0x000c90ad;
 			minimap->line++;
 			j++;
 		}

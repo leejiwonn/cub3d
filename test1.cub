@@ -1,9 +1,9 @@
-NO ./texture/stone.png
-SO ./texture/metal.png
-WE ./texture/brick.png
-EA ./texture/wood.png
-F 245, 169, 98
-C 221, 221, 221
+NO ./texture/pineapple.png
+SO ./texture/apple.png
+WE ./texture/peach_watermelon.png
+EA ./texture/two_apples.png
+F 232, 223, 213
+C 244, 248, 251
 
         1111111111111111111111111
         1000000000000000000000001
