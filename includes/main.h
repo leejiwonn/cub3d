@@ -8,6 +8,8 @@
 
 #define PIT 3.14 / 180
 
+#define UP 0
+#define DOWN 1
 #define WIDTH 0
 #define HEIGHT 1
 #define RESOL_X 800
@@ -21,7 +23,7 @@ typedef struct s_texture
     int size_line;
     int endian;
     int len[2];
-    double ratio[2];
+    double ratio_y;
 } t_texture;
 
 typedef struct s_player
@@ -34,7 +36,7 @@ typedef struct s_player
 
 typedef struct s_dda
 {
-    int map[2];
+    int pos_to_int[2];
     int point[2];
     int side;
     double ray[2];
@@ -51,9 +53,9 @@ typedef struct s_game
     void *mlx;
     void *window;
     void *image;
-    char *adr;
+    char *addr;
     int bpp;
-    int leng;
+    int size_line;
     int endian;
     t_parse *data;
     t_texture **texture;
@@ -70,7 +72,6 @@ char *set_game_data(t_game *game);
 
 t_texture **set_texture(void *mlx, char **list);
 void free_texture(t_texture **texture, void *mlx);
-unsigned int texture_color(char *ref, int y, t_texture *texture);
 
 t_player *set_player(int *location, char dir);
 char rotate_player(t_player *player, double seta);
@@ -79,8 +80,8 @@ char move_ad(t_player *player, char **worldmap, double flag);
 
 int ray_casting(t_game *game, t_player *player, t_parse *data);
 unsigned int set_color(char **worldmap, int x, int y, int side);
-void draw_point(t_dda *dda, t_parse *data);
-char *select_texture(t_texture **texture, t_dda *dda);
+void set_point(t_dda *dda, t_parse *data);
+char *get_texture_start(t_texture **texture, t_dda *dda);
 void set_dda_value(t_dda *dda, t_player *player, int resolution, int x);
 void hit_wall(t_dda *dda, char **map, double *pos);
 

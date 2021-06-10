@@ -18,10 +18,10 @@
 
 typedef struct s_color
 {
+    char a;
     char r;
     char g;
     char b;
-    char a;
 } t_color;
 
 typedef struct s_parse

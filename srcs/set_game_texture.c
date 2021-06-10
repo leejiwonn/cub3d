@@ -1,13 +1,5 @@
 #include "main.h"
 
-unsigned int texture_color(char *ref, int y, t_texture *texture)
-{
-    char *result;
-
-    result = ref + (int)(y * texture->ratio[1]) * texture->size_line;
-    return (*(unsigned int *)result);
-}
-
 void free_texture(t_texture **texture_info, void *mlx)
 {
     int i;

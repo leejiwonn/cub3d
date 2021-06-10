@@ -1,6 +1,14 @@
 #include "main.h"
 
-static void my_pixel_put(t_game *game, char *dst, char *ref)
+static unsigned int texture_color(char *texture_start, int y, t_texture *texture)
+{
+    char *result;
+
+    result = texture_start + (int)(y * texture->ratio_y) * texture->size_line;
+    return (*(unsigned int *)result);
+}
+
+static void draw_texture(t_game *game, char *img_data, char *texture_start)
 {
     int y;
     int flag;
@@ -10,39 +18,39 @@ static void my_pixel_put(t_game *game, char *dst, char *ref)
     y = 0;
     point = game->dda->point;
     color = game->data->color;
-    while (y < game->data->resol[1])
+    while (y < game->data->resol[Y])
     {
-        if (point[0] <= y && y <= point[1])
-            *(unsigned int *)dst = texture_color(ref, y - point[0], game->dda->cur);
+        if (point[UP] <= y && y <= point[DOWN])
+            *(unsigned int *)img_data = texture_color(texture_start, y - point[UP], game->dda->cur);
         else
         {
-            flag = 1;
-            if (y > point[1])
-                flag = 0;
-            *(unsigned int *)dst = (unsigned int)color[flag];
+            flag = 1; // 천장 색상
+            if (y > point[DOWN])
+                flag = 0; //바닥 색상
+            *(unsigned int *)img_data = (unsigned int)color[flag];
         }
-        dst += game->leng;
+        img_data += game->size_line;
         y++;
     }
 }
 
 int ray_casting(t_game *game, t_player *player, t_parse *data)
 {
-    int x;
-    char *dst;
+    int x_cur;
+    char *img_data;
 
-    game->image = mlx_new_image(game->mlx, data->resol[0], data->resol[1]);
-    game->adr = mlx_get_data_addr(game->image, &(game->bpp), &(game->leng), &(game->endian));
+    game->image = mlx_new_image(game->mlx, data->resol[X], data->resol[Y]);
+    game->addr = mlx_get_data_addr(game->image, &(game->bpp), &(game->size_line), &(game->endian));
     game->bpp /= 8;
-    x = -1;
-    dst = game->adr;
-    while (++x < data->resol[0])
+    x_cur = -1;
+    img_data = game->addr;
+    while (++x_cur < data->resol[X])
     {
-        set_dda_value(game->dda, player, data->resol[0], x);
+        set_dda_value(game->dda, player, data->resol[X], x_cur);
         hit_wall(game->dda, data->map, player->pos);
-        draw_point(game->dda, data);
-        my_pixel_put(game, dst, select_texture(game->texture, game->dda));
-        dst += game->bpp;
+        set_point(game->dda, data);
+        draw_texture(game, img_data, get_texture_start(game->texture, game->dda));
+        img_data += game->bpp;
     }
     mlx_put_image_to_window(game->mlx, game->window, game->image, 0, 0);
     mlx_destroy_image(game->mlx, game->image);
