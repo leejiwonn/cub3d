@@ -6,7 +6,7 @@
 /*   By: seujeon <seujeon@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/10 19:42:40 by seujeon           #+#    #+#             */
-/*   Updated: 2021/06/10 19:42:40 by seujeon          ###   ########.fr       */
+/*   Updated: 2021/06/10 19:44:11 by seujeon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,15 +38,15 @@ typedef struct  s_color
 
 typedef struct  s_parse
 {
-    int         resol[2]; // [0] = x, [1] = y
+    int         resol[2];
     int         col_index;
     int         map_width;
-    int         location[2]; // [0] = x, [1] = y
+    int         location[2];
     t_color     color[2];
     int         col_end;
     char        direction;
     char        **map;
-    char        **texture; // texture[0] = NO, [1] = SO, [2] = WE, [3] = EA, [4] = S
+    char        **texture;
 }               t_parse;
 
 char            *parse(t_parse **data, char *map_path);
