@@ -22,6 +22,27 @@ SRCS_NAME	= main.c \
 SRCS		= $(addprefix $(SRCS_DIR)/, $(SRCS_NAME))
 OBJS		= $(SRCS:.c=.o)
 
+BONUS_SRCS_DIR	= ./srcs_bonus
+BONUS_SRCS_NAME	= main_bonus.c \
+				event_key_bonus.c \
+				set_game_data_bonus.c \
+				set_game_player_bonus.c \
+				set_game_texture_bonus.c \
+				game_bonus.c \
+				get_next_line_bonus.c \
+				get_next_line_utils_bonus.c \
+				main_bonus.c \
+				parse_identifier_bonus.c \
+				parse_map_validation_bonus.c \
+				parse_map_bonus.c \
+				parse_utils_bonus.c \
+				parse_bonus.c \
+				raycasting_bonus.c \
+				raycasting_utils_bonus.c
+
+BONUS_SRCS		= $(addprefix $(BONUS_SRCS_DIR)/, $(BONUS_SRCS_NAME))
+BONUS_OBJS		= $(BONUS_SRCS:.c=.o)
+
 CC			= gcc
 CFLAGS		= -Wall -Wextra -Werror $(HEADER) -g3 -fsanitize=address
 RM			= rm -rf
@@ -33,8 +54,13 @@ $(NAME) :	$(OBJS)
 			cp minilibx/libmlx.dylib libmlx.dylib
 			$(CC) $(CFLAGS) $^ libmlx.dylib -o $@
 
+bonus	: 	$(BONUS_OBJS)
+			make -C minilibx
+			cp minilibx/libmlx.dylib libmlx.dylib
+			$(CC) $(CFLAGS) $^ libmlx.dylib -o $(NAME)
+
 clean :
-			$(RM) $(OBJS)
+			$(RM) $(OBJS) $(BONUS_OBJS)
 
 fclean :	clean
 			make clean -C minilibx

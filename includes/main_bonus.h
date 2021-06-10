@@ -1,10 +1,10 @@
 #ifndef MAIN_BONUS_H
-# define MAIN_H
+# define MAIN_BONUS_H
 
 # include <math.h>
 # include <stdlib.h>
 # include "mlx.h"
-# include "parse.h"
+# include "parse_bonus.h"
 
 # define PI 3.14
 # define HALF_CYCLE 180
