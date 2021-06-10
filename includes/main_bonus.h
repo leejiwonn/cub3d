@@ -114,7 +114,6 @@ char                *get_texture_start(t_texture **texture, t_dda *dda);
 void                set_dda_value(t_dda *dda, t_player *player, int resolution, int x);
 void                hit_wall(t_dda *dda, char **map, double *pos);
 
-int			        draw_minimap(t_game *game, t_player *player);
 int                 key_press(int keycode, t_game *game);
 int                 key_release(int keycode, t_game *game);
 int                 key_exit(t_game *game);

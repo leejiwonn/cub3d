@@ -1,51 +1,5 @@
 #include "main_bonus.h"
 
-void		set_minimap_pixels(t_game *game, t_minimap *minimap, t_player *player)
-{
-	int			i;
-	int			j;
-
-	i = 0;
-	while (i < minimap->y)
-	{
-		j = 0;
-		minimap->line = minimap->img;
-		while (j < minimap->x)
-		{
-			if (game->data->map[i / SCALE][j / SCALE] == ' ')
-				*minimap->line = 0x000000ff;
-			else if (game->data->map[i / SCALE][j / SCALE] == '1')
-				*minimap->line = 0x00000000;
-			else if (game->data->map[i / SCALE][j / SCALE] == '0')
-				*minimap->line = 0x0000ff00;
-			if (i / SCALE == (int)player->pos[Y] && j / SCALE == (int)player->pos[X])
-				*minimap->line = 0x00ff0000;
-			minimap->line++;
-			j++;
-		}
-		minimap->img += minimap->texture.size_line;
-		i++;
-	}
-}
-
-int			draw_minimap(t_game *game, t_player *player)
-{
-	t_minimap	minimap;
-	t_texture	texture;
-
-	minimap.y = game->data->col_index * SCALE;
-	minimap.x = game->data->map_width * SCALE;
-	texture.image = mlx_new_image(game->mlx, minimap.x, minimap.y);
-	texture.addr = mlx_get_data_addr(texture.image, &(texture.bpp), &(texture.size_line), &(texture.endian));
-	texture.size_line /= 4;
-	minimap.img = (unsigned int *)texture.addr;
-	minimap.texture = texture;
-	set_minimap_pixels(game, &minimap, player);
-	mlx_put_image_to_window(game->mlx, game->window, texture.image, 0, 0);
-	mlx_destroy_image(game->mlx, texture.image);
-	return (1);
-}
-
 int			key_press(int keycode, t_game *game)
 {
 	if (keycode == KEY_ESC)
