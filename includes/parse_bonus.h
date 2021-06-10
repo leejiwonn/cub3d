@@ -16,25 +16,25 @@
 # define FLAG_C 5
 # define FLAG_NOT 6
 
-typedef struct  s_color
+typedef struct 		s_color
 {
-    char        a;
-    char        r;
-    char        g;
-    char        b;
-}               t_color;
+	unsigned char	a;
+	unsigned char	r;
+	unsigned char	g;
+	unsigned char	b;
+}					t_color;
 
 typedef struct  s_parse
 {
-    int         resol[2];
-    int         col_index;
-    int         map_width;
-    int         location[2];
-    t_color     color[2];
-    int         col_end;
-    char        direction;
-    char        **map;
-    char        **texture;
+	int         resol[2];
+	int         col_index;
+	int         map_width;
+	int         location[2];
+	t_color     color[2];
+	int         col_end;
+	char        direction;
+	char        **map;
+	char        **texture;
 }               t_parse;
 
 char            *parse(t_parse **data, char *map_path);

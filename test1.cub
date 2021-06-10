@@ -2,8 +2,8 @@ NO ./texture/stone.png
 SO ./texture/metal.png
 WE ./texture/brick.png
 EA ./texture/wood.png
-F 0,255,0
-C 0,255,0
+F 245, 169, 98
+C 221, 221, 221
 
         1111111111111111111111111
         1000000000000000000000001

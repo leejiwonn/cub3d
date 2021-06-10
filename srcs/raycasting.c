@@ -6,7 +6,7 @@
 /*   By: seujeon <seujeon@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/10 19:41:38 by seujeon           #+#    #+#             */
-/*   Updated: 2021/06/10 19:41:39 by seujeon          ###   ########.fr       */
+/*   Updated: 2021/06/10 23:41:35 by seujeon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,8 @@ static void			draw_line_y(t_game *game, char *img_data, char *texture_start)
 			index = C;
 			if (y > point[DOWN])
 				index = F;
-			*(unsigned int *)img_data = *(unsigned int *)(color + index);
+			*(unsigned int *)img_data = (color[index].a << 24) +
+			(color[index].r << 16) + (color[index].g << 8) + color[index].b;
 		}
 		img_data += game->size_line;
 		y++;

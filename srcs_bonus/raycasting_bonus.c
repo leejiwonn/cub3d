@@ -14,13 +14,13 @@ static void			set_minimap_pixels(t_game *game,
 		while (j < minimap->x)
 		{
 			if (game->data->map[i / SCALE][j / SCALE] == ' ')
-				*minimap->line = 0x000000ff;
+				*minimap->line = 0x003c8dad;
 			else if (game->data->map[i / SCALE][j / SCALE] == '1')
-				*minimap->line = 0x00000000;
+				*minimap->line = 0x00125d98;
 			else if (game->data->map[i / SCALE][j / SCALE] == '0')
-				*minimap->line = 0x0000ff00;
+				*minimap->line = 0x00cbd7dc;
 			if (i / SCALE == (int)player->pos[Y] && j / SCALE == (int)player->pos[X])
-				*minimap->line = 0x00ff0000;
+				*minimap->line = 0x00125d98;
 			minimap->line++;
 			j++;
 		}
@@ -76,7 +76,8 @@ static void			draw_line_y(t_game *game, char *img_data, char *texture_start)
 			index = C;
 			if (y > point[DOWN])
 				index = F;
-			*(unsigned int *)img_data = *(unsigned int *)(color + index);
+			*(unsigned int *)img_data = (color[index].a << 24) +
+			(color[index].r << 16) + (color[index].g << 8) + color[index].b;
 		}
 		img_data += game->size_line;
 		y++;
