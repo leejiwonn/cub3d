@@ -6,7 +6,7 @@
 /*   By: seujeon <seujeon@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/10 19:41:33 by seujeon           #+#    #+#             */
-/*   Updated: 2021/06/10 19:41:33 by seujeon          ###   ########.fr       */
+/*   Updated: 2021/06/11 21:43:00 by seujeon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,11 @@ static char		*set_parse(t_parse *data, char *line, char *flags)
 	int		flag;
 	int		check_full;
 
+	if (!ft_strlen(line))
+	{
+		free(line);
+		return (0);
+	}
 	flag = get_flag(line);
 	check_full = is_full(flags);
 	if (!check_full && flag == FLAG_NOT)
