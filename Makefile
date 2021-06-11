@@ -48,6 +48,7 @@ CFLAGS		= -Wall -Wextra -Werror $(HEADER) -g3 -fsanitize=address
 RM			= rm -rf
 
 TEST_FILE	= beach.cub
+BONUS_TEST_FILE	= beach_b.cub
 
 all :		$(NAME)
 
@@ -76,4 +77,4 @@ testb:
 
 test:
 	make
-	./$(NAME) $(TEST_FILE)
+	./$(NAME) $(BONUS_TEST_FILE)
