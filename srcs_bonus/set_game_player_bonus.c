@@ -20,21 +20,21 @@ int			rotate_mouse(int x, int y, t_game *game)
 	return (game->player->key[MOUSE_MOVE]);
 }
 
-char			move_ws(t_player *player, char **worldmap, double flag)
+char			move_ws(t_player *player, char **worldmap, double scale)
 {
 	double	*pos;
 	double	*dir;
 
 	pos = player->pos;
 	dir = player->dir;
-	if (worldmap[(int)(pos[Y] + dir[Y] * flag)][(int)pos[X]] != '1')
-		pos[Y] += dir[Y] * flag;
-	if (worldmap[(int)(pos[Y])][(int)(pos[X] + dir[X] * flag)] != '1')
-		pos[X] += dir[X] * flag;
+	if (worldmap[(int)(pos[Y] + dir[Y] * scale)][(int)pos[X]] != '1')
+		pos[Y] += dir[Y] * scale;
+	if (worldmap[(int)(pos[Y])][(int)(pos[X] + dir[X] * scale)] != '1')
+		pos[X] += dir[X] * scale;
 	return (1);
 }
 
-char			move_ad(t_player *player, char **worldmap, double flag)
+char			move_ad(t_player *player, char **worldmap, double scale)
 {
 	double	tmp_x;
 	double	tmp_y;
@@ -47,10 +47,10 @@ char			move_ad(t_player *player, char **worldmap, double flag)
 	seta = (PI / HALF_CYCLE) * 90;
 	tmp_y = dir[Y] * cos(seta) - dir[X] * sin(seta);
 	tmp_x = dir[Y] * sin(seta) + dir[X] * cos(seta);
-	if (worldmap[(int)(pos[Y] + tmp_y * flag)][(int)pos[X]] != '1')
-		pos[Y] += tmp_y * flag;
-	if (worldmap[(int)pos[Y]][(int)(pos[X] + tmp_x * flag)] != '1')
-		pos[X] += tmp_x * flag;
+	if (worldmap[(int)(pos[Y] + tmp_y * scale)][(int)pos[X]] != '1')
+		pos[Y] += tmp_y * scale;
+	if (worldmap[(int)pos[Y]][(int)(pos[X] + tmp_x * scale)] != '1')
+		pos[X] += tmp_x * scale;
 	return (1);
 }
 

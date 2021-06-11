@@ -105,8 +105,8 @@ void                free_texture(t_texture **texture, void *mlx);
 
 t_player            *set_player(int *location, char dir);
 char                rotate_player(t_player *player, double seta);
-char                move_ws(t_player *player, char **worldmap, double flag);
-char                move_ad(t_player *player, char **worldmap, double flag);
+char                move_ws(t_player *player, char **worldmap, double scale);
+char                move_ad(t_player *player, char **worldmap, double scale);
 int					rotate_mouse(int x, int y, t_game *game);
 
 int                 ray_casting(t_game *game, t_player *player, t_parse *data);
