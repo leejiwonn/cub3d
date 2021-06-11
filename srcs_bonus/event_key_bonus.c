@@ -51,6 +51,8 @@ int			main_loop(t_game *game)
 		is_active = rotate_player(game->player, (PI / HALF_CYCLE) * 1.5);
 	else if (game->player->key[RIGHT] == 1)
 		is_active = rotate_player(game->player, (PI / HALF_CYCLE) * -1.5);
+	if (game->player->key[MOUSE_MOVE] == 1)
+		is_active = 1;
 	if (is_active)
 		ray_casting(game, game->player, game->data);
 	return (1);

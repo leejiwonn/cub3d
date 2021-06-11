@@ -32,6 +32,7 @@
 # define W 3
 # define LEFT 4
 # define RIGHT 5
+# define MOUSE_MOVE 6
 
 # define SCALE 10
 
@@ -60,7 +61,7 @@ typedef struct      s_player
     double          pos[2];
     double          dir[2];
     double          plane[2];
-    int             key[6];
+    int             key[8];
 }                   t_player;
 
 typedef struct      s_dda
@@ -106,6 +107,7 @@ t_player            *set_player(int *location, char dir);
 char                rotate_player(t_player *player, double seta);
 char                move_ws(t_player *player, char **worldmap, double flag);
 char                move_ad(t_player *player, char **worldmap, double flag);
+int					rotate_mouse(int x, int y, t_game *game);
 
 int                 ray_casting(t_game *game, t_player *player, t_parse *data);
 unsigned int        set_color(char **worldmap, int x, int y, int side);
