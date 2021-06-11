@@ -29,8 +29,14 @@ char			move_ws(t_player *player, char **worldmap, double scale)
 	dir = player->dir;
 	if (worldmap[(int)(pos[Y] + dir[Y] * scale)][(int)pos[X]] != '1')
 		pos[Y] += dir[Y] * scale;
-	if (worldmap[(int)(pos[Y])][(int)(pos[X] + dir[X] * scale)] != '1')
+	else if (worldmap[(int)(pos[Y] + dir[Y] * scale)][(int)pos[X]] == '1')
+		if (worldmap[(int)(pos[Y] - dir[Y] * scale * 2)][(int)pos[X]] != '1')
+			pos[Y] -= dir[Y] * scale * 2;
+	if (worldmap[(int)pos[Y]][(int)(pos[X] + dir[X] * scale)] != '1')
 		pos[X] += dir[X] * scale;
+	else if (worldmap[(int)pos[Y]][(int)(pos[X] + dir[X] * scale)] == '1')
+		if (worldmap[(int)pos[Y]][(int)(pos[X] - dir[X] * scale * 2)] != '1')
+			pos[X] -= dir[X] * scale * 2;
 	return (1);
 }
 
@@ -49,8 +55,14 @@ char			move_ad(t_player *player, char **worldmap, double scale)
 	tmp_x = dir[Y] * sin(seta) + dir[X] * cos(seta);
 	if (worldmap[(int)(pos[Y] + tmp_y * scale)][(int)pos[X]] != '1')
 		pos[Y] += tmp_y * scale;
+	else if (worldmap[(int)(pos[Y] + tmp_y * scale)][(int)pos[X]] == '1')
+		if (worldmap[(int)(pos[Y] - tmp_y * scale * 2)][(int)pos[X]] != '1')
+			pos[Y] -= tmp_y * scale * 2;
 	if (worldmap[(int)pos[Y]][(int)(pos[X] + tmp_x * scale)] != '1')
 		pos[X] += tmp_x * scale;
+	else if (worldmap[(int)pos[Y]][(int)(pos[X] + tmp_x * scale)] == '1')
+		if (worldmap[(int)pos[Y]][(int)(pos[X] - tmp_x * scale * 2)] != '1')
+			pos[X] -= tmp_x * scale * 2;
 	return (1);
 }
 

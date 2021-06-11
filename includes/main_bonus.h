@@ -9,6 +9,8 @@
 # define PI 3.14
 # define HALF_CYCLE 180
 
+# define MOVE_SCALE 0.3
+
 # define UP 0
 # define DOWN 1
 # define C 1
