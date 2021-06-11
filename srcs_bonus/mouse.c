@@ -17,7 +17,6 @@ int			proc_mouse_event(int x, int y, t_game *game)
 	(void)y;
 	if (game && game->player)
 		game->player->mouse_x = x;
-	mlx_mouse_hide();
 	game->player->key[MOUSE_MOVE] = 1;
 	return (1);
 }

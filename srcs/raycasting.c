@@ -57,7 +57,7 @@ int					ray_casting(t_game *game, t_player *player, t_parse *data)
 
 	if (!(game->image = mlx_new_image(game->mlx,
 					data->resol[X], data->resol[Y])))
-		return (free_game(game));
+		return (free_game_exit(game, "creating raycasting image failed"));
 	game->addr = mlx_get_data_addr(game->image, &(game->bpp),
 			&(game->size_line), &(game->endian));
 	game->bpp /= 8;

@@ -26,9 +26,15 @@ int			key_press(int keycode, t_game *game)
 	if (keycode == KEY_LEFT || keycode == KEY_RIGHT)
 		game->player->key[keycode - 119] = 1;
 	if (keycode == KEY_P && game->player->key[MOUSE_TOGGLE])
+	{
+		mlx_mouse_show();
 		game->player->key[MOUSE_TOGGLE] = 0;
+	}
 	else if (keycode == KEY_P && !game->player->key[MOUSE_TOGGLE])
+	{
+		mlx_mouse_hide();
 		game->player->key[MOUSE_TOGGLE] = 1;
+	}
 	return (0);
 }
 

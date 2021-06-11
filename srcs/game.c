@@ -55,6 +55,25 @@ int			free_game(t_game *game)
 	return (1);
 }
 
+int			free_game_exit(t_game *game, char *message)
+{
+	if (game->texture)
+		free_texture(game->texture, game->mlx);
+	if (game->data)
+		free_data(game->data);
+	if (game->image)
+		mlx_destroy_image(game->mlx, game->image);
+	if (game->dda)
+		free(game->dda);
+	if (game->player)
+		free(game->player);
+	if (game->window)
+		mlx_destroy_window(game->mlx, game->window);
+	printf("Error\nMessage : %s", message);
+	exit(1);
+	return (1);
+}
+
 char		*set_game(t_game *game, char *map_path)
 {
 	char	*error_msg;

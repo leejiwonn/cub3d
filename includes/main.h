@@ -99,6 +99,7 @@ char				*set_game(t_game *game, char *map_path);
 char				*init_game(t_game **game);
 void				run_game(t_game *game);
 int					free_game(t_game *game);
+int					free_game_exit(t_game *game, char *message);
 
 char				*set_game_data(t_game *game);
 

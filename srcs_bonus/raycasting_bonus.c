@@ -51,7 +51,11 @@ static int			draw_minimap(t_game *game, t_player *player)
 	minimap->y = (game->data->col_index + 1) * SCALE + SCALE;
 	minimap->x = (game->data->map_width + 1) * SCALE + SCALE;
 	if (!(minimap->img = mlx_new_image(game->mlx, minimap->x, minimap->y)))
-		return (free_game(game));
+	{
+		printf("Error\nMessage : drawing minimap fail");
+		free_game(game);
+		exit(1);
+	}
 	texture.image = minimap->img;
 	texture.addr = mlx_get_data_addr(texture.image, &(texture.bpp),
 			&(texture.size_line), &(texture.endian));
@@ -110,7 +114,7 @@ int					ray_casting(t_game *game, t_player *player, t_parse *data)
 
 	if (!(game->image = mlx_new_image(game->mlx,
 					data->resol[X], data->resol[Y])))
-		return (free_game(game));
+		return (free_game_exit(game, "creating raycasting image failed"));
 	game->addr = mlx_get_data_addr(game->image,
 					&(game->bpp), &(game->size_line), &(game->endian));
 	game->bpp /= 8;

@@ -14,8 +14,6 @@
 
 char		*init_game(t_game **game)
 {
-	if (!(*game = malloc(sizeof(t_game))))
-		return ("game malloc failed");
 	if (!((*game)->mlx = mlx_init()))
 		return ("mlx_init failed");
 	(*game)->window = 0;
@@ -45,7 +43,7 @@ void		run_game(t_game *game)
 	mlx_loop(game->mlx);
 }
 
-int			free_game(t_game *game)
+int			free_game_exit(t_game *game, char *message)
 {
 	if (game->texture)
 		free_texture(game->texture, game->mlx);
@@ -53,6 +51,8 @@ int			free_game(t_game *game)
 		mlx_destroy_image(game->mlx, game->door.image);
 	if (game->minimap.img)
 		mlx_destroy_image(game->mlx, game->minimap.img);
+	if (game->image)
+		mlx_destroy_image(game->mlx, game->image);
 	if (game->data)
 		free_data(game->data);
 	if (game->dda)
@@ -61,19 +61,39 @@ int			free_game(t_game *game)
 		free(game->player);
 	if (game->window)
 		mlx_destroy_window(game->mlx, game->window);
-	if (game->mlx)
-		free(game->mlx);
-	free(game);
+	printf("Error\nMessage : %s", message);
+	exit(1);
 	return (1);
 }
 
-char		*set_game(t_game **game, char *map_path)
+int			free_game(t_game *game)
+{
+	if (game->texture)
+		free_texture(game->texture, game->mlx);
+	if (game->door.image)
+		mlx_destroy_image(game->mlx, game->door.image);
+	if (game->minimap.img)
+		mlx_destroy_image(game->mlx, game->minimap.img);
+	if (game->image)
+		mlx_destroy_image(game->mlx, game->image);
+	if (game->data)
+		free_data(game->data);
+	if (game->dda)
+		free(game->dda);
+	if (game->player)
+		free(game->player);
+	if (game->window)
+		mlx_destroy_window(game->mlx, game->window);
+	return (1);
+}
+
+char		*set_game(t_game *game, char *map_path)
 {
 	char	*error_msg;
 
-	if ((error_msg = init_game(game)))
+	if ((error_msg = init_game(&game)))
 		return (error_msg);
-	if ((error_msg = parse(&(*game)->data, map_path)))
+	if ((error_msg = parse(&game->data, map_path)))
 		return (error_msg);
-	return (set_game_data(*game));
+	return (set_game_data(game));
 }
