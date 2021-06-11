@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   get_next_line_bonus.c                              :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: jiwonlee <jiwonlee@student.42seoul.kr>     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/06/12 02:03:47 by jiwonlee          #+#    #+#             */
+/*   Updated: 2021/06/12 02:05:51 by jiwonlee         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "get_next_line.h"
 
 static int		find_fd(int fd, t_fdlist **fdl, t_fdlist **cur)
@@ -59,7 +71,7 @@ static void		remove_curfd(int fd, t_fdlist **fdl)
 }
 
 static int		set_result(char **line, t_fdlist *cur, int size,
-					  t_fdlist **fdl)
+		t_fdlist **fdl)
 {
 	char		*div;
 	char		*tmp;
@@ -84,13 +96,14 @@ static int		set_result(char **line, t_fdlist *cur, int size,
 
 int				get_next_line(int fd, char **line)
 {
-	static		t_fdlist *fdlist;
-	t_fdlist	*cur;
-	char		*buff;
-	char		*tmp;
-	int			size;
+	static t_fdlist	*fdlist;
+	t_fdlist		*cur;
+	char			*buff;
+	char			*tmp;
+	int				size;
 
-	if (fd < 0 || BUFFER_SIZE <= 0 || !line || !(find_fd(fd, &fdlist, &cur)) || !(buff = (char *)malloc(BUFFER_SIZE + 1)))
+	if (fd < 0 || BUFFER_SIZE <= 0 || !line || !(find_fd(fd, &fdlist, &cur))
+			|| !(buff = (char *)malloc(BUFFER_SIZE + 1)))
 		return (-1);
 	if (!cur->save)
 		cur->save = ft_strdup("", 0);
@@ -102,7 +115,7 @@ int				get_next_line(int fd, char **line)
 		if (!(tmp = ft_strchr(cur->save)))
 			return (-1);
 		if (*tmp)
-			break;
+			break ;
 	}
 	free(buff);
 	if (size == -1)

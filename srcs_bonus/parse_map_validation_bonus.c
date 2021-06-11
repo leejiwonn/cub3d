@@ -1,6 +1,18 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   parse_map_validation_bonus.c                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: jiwonlee <jiwonlee@student.42seoul.kr>     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/06/12 02:08:51 by jiwonlee          #+#    #+#             */
+/*   Updated: 2021/06/12 02:10:17 by jiwonlee         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "main_bonus.h"
 
-static int	check_around(char **map, int col, int row)
+static int		check_around(char **map, int col, int row)
 {
 	int	i;
 	int	j;
@@ -16,9 +28,10 @@ static int	check_around(char **map, int col, int row)
 	return (1);
 }
 
-static char	*check_door(t_parse *data, int y, int x)
+static char		*check_door(t_parse *data, int y, int x)
 {
 	t_door_list	*new;
+
 	if (data->map[y][x] != 'D')
 		return (0);
 	if (!(new = create_door_list(x, y)))
@@ -27,10 +40,10 @@ static char	*check_door(t_parse *data, int y, int x)
 		return ("creating door list failed");
 	}
 	add_list(&(data->door_list), new);
-	return(0);
+	return (0);
 }
 
-static char	*check_player(t_parse *data, int col, int row)
+static char		*check_player(t_parse *data, int col, int row)
 {
 	char	cur;
 
@@ -51,7 +64,7 @@ static char	*check_player(t_parse *data, int col, int row)
 	return (0);
 }
 
-static char	find_chr(const char *str, char target)
+static char		find_chr(const char *str, char target)
 {
 	while (*str)
 	{
@@ -62,7 +75,7 @@ static char	find_chr(const char *str, char target)
 	return (0);
 }
 
-char		*map_validation(t_parse *data, int map_width)
+char			*map_validation(t_parse *data, int map_width)
 {
 	int		col;
 	int		row;

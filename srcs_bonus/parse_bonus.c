@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   parse_bonus.c                                      :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: jiwonlee <jiwonlee@student.42seoul.kr>     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/06/12 02:06:46 by jiwonlee          #+#    #+#             */
+/*   Updated: 2021/06/12 02:07:03 by jiwonlee         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "main_bonus.h"
 #include "parse_bonus.h"
 
@@ -66,7 +78,7 @@ char			*parse(t_parse **data, char *map_path)
 		if ((result = get_next_line(fd, &line)) == -1)
 			return ("get_next_line failed");
 		if (!result && !*line)
-			break;
+			break ;
 		if ((error_msg = set_parse(*data, line, flags)))
 			return (error_msg);
 	}

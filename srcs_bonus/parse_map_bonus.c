@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   parse_map_bonus.c                                  :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: jiwonlee <jiwonlee@student.42seoul.kr>     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/06/12 02:08:12 by jiwonlee          #+#    #+#             */
+/*   Updated: 2021/06/12 02:08:44 by jiwonlee         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "parse_bonus.h"
 
 static int	set_padding(char **map, int end, int map_width)
@@ -21,7 +33,8 @@ static int	set_padding(char **map, int end, int map_width)
 	return (1);
 }
 
-static int	resize_col(char ***map_ref, int col_end, int padding_size, int map_width)
+static int	resize_col(char ***map_ref, int col_end,
+		int padding_size, int map_width)
 {
 	char	**new_map;
 	int		i;
@@ -30,7 +43,8 @@ static int	resize_col(char ***map_ref, int col_end, int padding_size, int map_wi
 		return (0);
 	i = 0;
 	if (padding_size)
-		if (!(set_padding(new_map, col_end + padding_size, map_width + padding_size)))
+		if (!(set_padding(new_map, col_end + padding_size,
+						map_width + padding_size)))
 			return (0);
 	while (*(*map_ref + i))
 	{

@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   parse_identifier_bonus.c                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: jiwonlee <jiwonlee@student.42seoul.kr>     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/06/12 02:07:09 by jiwonlee          #+#    #+#             */
+/*   Updated: 2021/06/12 02:08:04 by jiwonlee         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "parse_bonus.h"
 
 static int		is_png_file(char *path, int len)
@@ -5,7 +17,7 @@ static int		is_png_file(char *path, int len)
 	int	i;
 
 	i = 0;
-	path += len - 4;					
+	path += len - 4;
 	if (path[i] != '.')
 		return (0);
 	i++;
@@ -76,7 +88,7 @@ int				set_wall_texture_path(char **target, char **line)
 	return (1);
 }
 
-char		*set_identifier(t_parse *data, char *line, int flag)
+char			*set_identifier(t_parse *data, char *line, int flag)
 {
 	char	*line_cur;
 	char	*error_msg;

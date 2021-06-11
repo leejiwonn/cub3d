@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   raycasting_utils_bonus.c                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: jiwonlee <jiwonlee@student.42seoul.kr>     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/06/12 02:19:45 by jiwonlee          #+#    #+#             */
+/*   Updated: 2021/06/12 02:20:04 by jiwonlee         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "main_bonus.h"
 
 void	set_point(t_dda *dda, t_parse *data)
@@ -28,7 +40,8 @@ char	*get_texture_start(t_texture **texture, t_dda *dda, t_game *game)
 	}
 	dda->cur->ratio_y = (double)(dda->cur->len[HEIGHT] - 1);
 	dda->cur->ratio_y /= (double)(dda->point[DOWN] - dda->point[UP] + 1);
-	pixel_offset = (int)(dda->wall_x * (dda->cur->len[WIDTH] - 1)) * dda->cur->bpp;
+	pixel_offset = (int)(dda->wall_x * (dda->cur->len[WIDTH] - 1))
+		* dda->cur->bpp;
 	return (dda->cur->addr + pixel_offset);
 }
 

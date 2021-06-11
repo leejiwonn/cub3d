@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   raycasting_bonus.c                                 :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: jiwonlee <jiwonlee@student.42seoul.kr>     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/06/12 02:19:32 by jiwonlee          #+#    #+#             */
+/*   Updated: 2021/06/12 02:19:37 by jiwonlee         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "main_bonus.h"
 
 static void			set_minimap_pixels(t_game *game,
@@ -6,12 +18,12 @@ static void			set_minimap_pixels(t_game *game,
 	int			i;
 	int			j;
 
-	i = 0;
-	while (i < minimap->y)
+	i = -1;
+	while (++i < minimap->y)
 	{
-		j = 0;
+		j = -1;
 		minimap->line = minimap->cur_img_ptr;
-		while (j < minimap->x)
+		while (++j < minimap->x)
 		{
 			if (game->data->map[i / SCALE][j / SCALE] == ' ')
 				*minimap->line = MINIMAP_COLOR_SPACE;
@@ -21,13 +33,12 @@ static void			set_minimap_pixels(t_game *game,
 				*minimap->line = MINIMAP_COLOR_DOOR;
 			else if (game->data->map[i / SCALE][j / SCALE] == '0')
 				*minimap->line = MINIMAP_COLOR_ROAD;
-			if (i / SCALE == (int)player->pos[Y] && j / SCALE == (int)player->pos[X])
+			if (i / SCALE == (int)player->pos[Y]
+					&& j / SCALE == (int)player->pos[X])
 				*minimap->line = MINIMAP_COLOR_PLAYER;
 			minimap->line++;
-			j++;
 		}
 		minimap->cur_img_ptr += minimap->texture.size_line;
-		i++;
 	}
 }
 
@@ -42,7 +53,8 @@ static int			draw_minimap(t_game *game, t_player *player)
 	if (!(minimap->img = mlx_new_image(game->mlx, minimap->x, minimap->y)))
 		return (free_game(game));
 	texture.image = minimap->img;
-	texture.addr = mlx_get_data_addr(texture.image, &(texture.bpp), &(texture.size_line), &(texture.endian));
+	texture.addr = mlx_get_data_addr(texture.image, &(texture.bpp),
+			&(texture.size_line), &(texture.endian));
 	texture.size_line /= 4;
 	minimap->cur_img_ptr = (unsigned int *)texture.addr;
 	minimap->texture = texture;
@@ -62,7 +74,8 @@ static unsigned int	get_texture_color(char *texture_start,
 	return (*(unsigned int *)result);
 }
 
-static void			draw_line_y(t_game *game, char *img_data, char *texture_start)
+static void			draw_line_y(t_game *game, char *img_data,
+		char *texture_start)
 {
 	int		y;
 	int		index;
@@ -75,8 +88,8 @@ static void			draw_line_y(t_game *game, char *img_data, char *texture_start)
 	while (y < game->data->resol[Y])
 	{
 		if (point[UP] <= y && y <= point[DOWN])
-			*(unsigned int *)img_data = get_texture_color(
-								texture_start, y - point[UP], game->dda->cur);
+			*(unsigned int *)img_data = get_texture_color(texture_start,
+					y - point[UP], game->dda->cur);
 		else
 		{
 			index = C;
@@ -95,7 +108,8 @@ int					ray_casting(t_game *game, t_player *player, t_parse *data)
 	int		x_cur;
 	char	*img_data;
 
-	if (!(game->image = mlx_new_image(game->mlx, data->resol[X], data->resol[Y])))
+	if (!(game->image = mlx_new_image(game->mlx,
+					data->resol[X], data->resol[Y])))
 		return (free_game(game));
 	game->addr = mlx_get_data_addr(game->image,
 					&(game->bpp), &(game->size_line), &(game->endian));
@@ -107,7 +121,8 @@ int					ray_casting(t_game *game, t_player *player, t_parse *data)
 		set_dda_value(game->dda, player, data->resol[X], x_cur);
 		hit_wall(game->dda, data->map, player->pos);
 		set_point(game->dda, data);
-		draw_line_y(game, img_data, get_texture_start(game->texture, game->dda, game));
+		draw_line_y(game, img_data,
+				get_texture_start(game->texture, game->dda, game));
 		img_data += game->bpp;
 	}
 	mlx_put_image_to_window(game->mlx, game->window, game->image, 0, 0);
