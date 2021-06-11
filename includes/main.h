@@ -6,7 +6,7 @@
 /*   By: seujeon <seujeon@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/10 19:42:23 by seujeon           #+#    #+#             */
-/*   Updated: 2021/06/10 19:42:25 by seujeon          ###   ########.fr       */
+/*   Updated: 2021/06/11 14:43:19 by seujeon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,8 +105,8 @@ void                free_texture(t_texture **texture, void *mlx);
 
 t_player            *set_player(int *location, char dir);
 char                rotate_player(t_player *player, double seta);
-char                move_ws(t_player *player, char **worldmap, double flag);
-char                move_ad(t_player *player, char **worldmap, double flag);
+char                move_ws(t_player *player, char **worldmap, double scale);
+char                move_ad(t_player *player, char **worldmap, double scale);
 
 int                 ray_casting(t_game *game, t_player *player, t_parse *data);
 unsigned int        set_color(char **worldmap, int x, int y, int side);
