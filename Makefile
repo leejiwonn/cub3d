@@ -73,8 +73,8 @@ re :		fclean all
 
 testb:
 	make bonus
-	./$(NAME) $(TEST_FILE)
+	./$(NAME) $(BONUS_TEST_FILE)
 
 test:
 	make
-	./$(NAME) $(BONUS_TEST_FILE)
+	./$(NAME) $(TEST_FILE)
