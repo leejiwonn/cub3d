@@ -1,4 +1,4 @@
-#include "parse_bonus.h"
+#include "main_bonus.h"
 
 int		parse_atoi(char **line, int *target)
 {
@@ -45,6 +45,7 @@ void	free_data(t_parse *data)
 		free(data->texture);
 		i = 0;
 	}
+	free_list(data->door_list);
 }
 
 int		get_flag(char *line)

@@ -24,6 +24,16 @@ typedef struct 		s_color
 	unsigned char	b;
 }					t_color;
 
+typedef struct		s_door_list t_door_list;
+
+struct				s_door_list
+{
+	int				x;
+	int				y;
+	char			status;
+	t_door_list		*next;
+};
+
 typedef struct  s_parse
 {
 	int         resol[2];
@@ -35,6 +45,7 @@ typedef struct  s_parse
 	char        direction;
 	char        **map;
 	char        **texture;
+	t_door_list	*door_list;
 }               t_parse;
 
 char            *parse(t_parse **data, char *map_path);

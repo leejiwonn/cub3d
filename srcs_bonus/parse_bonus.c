@@ -13,6 +13,7 @@ static char		init_parse(t_parse **data)
 	ft_memset((*data)->map, 0, sizeof(char *) * 21);
 	ft_memset((*data)->resol, 0, sizeof(int) * 6);
 	ft_memset((*data)->color, 0, sizeof(t_color) * 2);
+	(*data)->door_list = 0;
 	(*data)->direction = 0;
 	(*data)->col_end = 20;
 	return (1);

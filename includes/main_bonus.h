@@ -20,10 +20,17 @@
 # define RESOL_X 800
 # define RESOL_Y 600
 
+# define MINIMAP_COLOR_SPACE 0x0091e0f4
+# define MINIMAP_COLOR_WALL 0x000c90ad
+# define MINIMAP_COLOR_DOOR 0x00b7b7b7
+# define MINIMAP_COLOR_ROAD 0x00f8f1f9
+# define MINIMAP_COLOR_PLAYER 0x000c90ad
+
 # define KEY_A 0
 # define KEY_S 1
 # define KEY_D 2
 # define KEY_W 13
+# define KEY_SPACE 49
 # define KEY_ESC 53
 # define KEY_LEFT 123
 # define KEY_RIGHT 124
@@ -35,6 +42,7 @@
 # define LEFT 4
 # define RIGHT 5
 # define MOUSE_MOVE 6
+# define SPACE 7
 
 # define SCALE 10
 
@@ -91,6 +99,8 @@ typedef struct      s_game
     int             endian;
     t_parse         *data;
     t_texture       **texture;
+	t_texture		door;
+
     t_player        *player;
     t_dda           *dda;
 }                   t_game;
@@ -104,6 +114,7 @@ char                *set_game_data(t_game *game);
 
 t_texture           **set_texture(void *mlx, char **list);
 void                free_texture(t_texture **texture, void *mlx);
+int					set_texture_data(void *mlx, char *path, t_texture *texture_info);
 
 t_player            *set_player(int *location, char dir);
 char                rotate_player(t_player *player, double seta);
@@ -114,7 +125,7 @@ int					rotate_mouse(int x, int y, t_game *game);
 int                 ray_casting(t_game *game, t_player *player, t_parse *data);
 unsigned int        set_color(char **worldmap, int x, int y, int side);
 void                set_point(t_dda *dda, t_parse *data);
-char                *get_texture_start(t_texture **texture, t_dda *dda);
+char                *get_texture_start(t_texture **texture, t_dda *dda, t_game *game);
 void                set_dda_value(t_dda *dda, t_player *player, int resolution, int x);
 void                hit_wall(t_dda *dda, char **map, double *pos);
 
@@ -122,5 +133,10 @@ int                 key_press(int keycode, t_game *game);
 int                 key_release(int keycode, t_game *game);
 int                 key_exit(t_game *game);
 int                 main_loop(t_game *game);
+
+int					is_door_pos(int x, int y, t_game *game);
+t_door_list			*create_door_list(int x, int y);
+void				free_list(t_door_list *head);
+void				add_list(t_door_list **head, t_door_list *new);
 
 #endif

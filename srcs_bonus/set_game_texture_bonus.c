@@ -15,15 +15,21 @@ void			free_texture(t_texture **texture_info, void *mlx)
 	free(texture_info);
 }
 
-static int		set_texture_data(void *mlx, char *list, t_texture *texture_info)
+int				set_texture_data(void *mlx, char *path, t_texture *texture_info)
 {
+	int fd;
+
+	if ((fd = open(path, O_RDONLY)) <= 0)
+		return (0);
+	close(fd);
 	if (!(texture_info->image = mlx_png_file_to_image(
-		mlx, list, &texture_info->len[WIDTH], &texture_info->len[HEIGHT])))
+		mlx, path, &texture_info->len[WIDTH], &texture_info->len[HEIGHT])))
 		return (0);
 	if (!(texture_info->addr = mlx_get_data_addr(
 		texture_info->image, &(texture_info->bpp),
 		&(texture_info->size_line), &(texture_info->endian))))
 		return (0);
+	texture_info->bpp /= 8;
 	return (1);
 }
 
@@ -46,7 +52,6 @@ t_texture		**set_texture(void *mlx, char **list)
 			free_texture(texture_info, mlx);
 			return (0);
 		}
-		texture_info[i]->bpp /= 8;
 	}
 	return (texture_info);
 }

@@ -24,6 +24,8 @@ int			key_release(int keycode, t_game *game)
 		game->player->key[3] = 0;
 	if (keycode == KEY_LEFT || keycode == KEY_RIGHT)
 		game->player->key[keycode - 119] = 0;
+	if (keycode == KEY_SPACE)
+		game->player->key[SPACE] = 1;
 	return (0);
 }
 
@@ -32,6 +34,26 @@ int			key_exit(t_game *game)
 	free_game(game);
 	exit(0);
 	return (0);
+}
+
+int			activate_door(t_game *game, t_player *player)
+{
+	int		x;
+	int		y;
+
+	y = player->pos[Y] + player->dir[Y];
+	x = player->pos[X] + player->dir[X];
+	game->player->key[SPACE] = 0;
+	if (y >= game->data->col_index - 1 || y <= 0
+		|| x >= game->data->map_width - 1 || x <= 0)
+		return (0);
+	if ((int)player->pos[Y] == y && (int)player->pos[X] == x)
+		return (0);
+	if (game->data->map[y][x] == 'D')
+		game->data->map[y][x] = '0';
+	else if (game->data->map[y][x] == '0' && is_door_pos(x, y, game))
+		game->data->map[y][x] = 'D';
+	return (1);
 }
 
 int			main_loop(t_game *game)
@@ -53,6 +75,8 @@ int			main_loop(t_game *game)
 		is_active = rotate_player(game->player, (PI / HALF_CYCLE) * -1.5);
 	if (game->player->key[MOUSE_MOVE] == 1)
 		is_active = 1;
+	if (game->player->key[SPACE] == 1)
+		is_active = activate_door(game, game->player);
 	if (is_active)
 		ray_casting(game, game->player, game->data);
 	return (1);

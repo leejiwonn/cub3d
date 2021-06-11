@@ -16,6 +16,9 @@ char		*init_game(t_game **game)
 	(*game)->texture = 0;
 	(*game)->player = 0;
 	(*game)->dda = 0;
+	(*game)->door.image = 0;
+	if (!set_texture_data((*game)->mlx, "./texture/door.png", &((*game)->door)))
+		return ("mlx_init invalid door file");
 	return (0);
 }
 
@@ -33,6 +36,8 @@ void		free_game(t_game *game)
 {
 	if (game->texture)
 		free_texture(game->texture, game->mlx);
+	if (game->door.image)
+		mlx_destroy_image(game->mlx, game->door.image);
 	if (game->data)
 		free_data(game->data);
 	if (game->dda)
