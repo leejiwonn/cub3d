@@ -47,6 +47,8 @@ CC			= gcc
 CFLAGS		= -Wall -Wextra -Werror $(HEADER) -g3 -fsanitize=address
 RM			= rm -rf
 
+TEST_FILE	= beach.cub
+
 all :		$(NAME)
 
 $(NAME) :	$(OBJS)
@@ -70,8 +72,8 @@ re :		fclean all
 
 testb:
 	make bonus
-	./$(NAME) test1.cub
+	./$(NAME) $(TEST_FILE)
 
 test:
 	make
-	./$(NAME) test1.cub
+	./$(NAME) $(TEST_FILE)
