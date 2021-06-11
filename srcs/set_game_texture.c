@@ -6,7 +6,7 @@
 /*   By: seujeon <seujeon@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/10 19:41:46 by seujeon           #+#    #+#             */
-/*   Updated: 2021/06/10 19:41:46 by seujeon          ###   ########.fr       */
+/*   Updated: 2021/06/11 15:52:46 by seujeon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,10 +27,15 @@ void			free_texture(t_texture **texture_info, void *mlx)
 	free(texture_info);
 }
 
-static int		set_texture_data(void *mlx, char *list, t_texture *texture_info)
+static int		set_texture_data(void *mlx, char *path, t_texture *texture_info)
 {
+	int fd;
+
+	if ((fd = open(path, O_RDONLY)) <= 0)
+		return (0);
+	close(fd);
 	if (!(texture_info->image = mlx_png_file_to_image(
-		mlx, list, &texture_info->len[WIDTH], &texture_info->len[HEIGHT])))
+		mlx, path, &texture_info->len[WIDTH], &texture_info->len[HEIGHT])))
 		return (0);
 	if (!(texture_info->addr = mlx_get_data_addr(
 		texture_info->image, &(texture_info->bpp),
