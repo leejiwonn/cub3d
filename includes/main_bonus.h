@@ -59,10 +59,11 @@ typedef struct      s_texture
 
 typedef struct      s_minimap
 {
-    int y;
-    int x;
-    unsigned int *img;
-    unsigned int *line;
+    int				y;
+    int				x;
+	char			*img;
+    unsigned int	*cur_img_ptr;
+    unsigned int	*line;
     t_texture texture;
 }                   t_minimap;
 
@@ -100,7 +101,7 @@ typedef struct      s_game
     t_parse         *data;
     t_texture       **texture;
 	t_texture		door;
-
+	t_minimap		minimap;
     t_player        *player;
     t_dda           *dda;
 }                   t_game;
@@ -108,7 +109,7 @@ typedef struct      s_game
 char                *set_game(t_game **game, char *map_path);
 char                *init_game(t_game **game);
 void                run_game(t_game *game);
-void                free_game(t_game *game);
+int					free_game(t_game *game);
 
 char                *set_game_data(t_game *game);
 

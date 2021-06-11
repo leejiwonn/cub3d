@@ -10,7 +10,7 @@ static void			set_minimap_pixels(t_game *game,
 	while (i < minimap->y)
 	{
 		j = 0;
-		minimap->line = minimap->img;
+		minimap->line = minimap->cur_img_ptr;
 		while (j < minimap->x)
 		{
 			if (game->data->map[i / SCALE][j / SCALE] == ' ')
@@ -26,26 +26,30 @@ static void			set_minimap_pixels(t_game *game,
 			minimap->line++;
 			j++;
 		}
-		minimap->img += minimap->texture.size_line;
+		minimap->cur_img_ptr += minimap->texture.size_line;
 		i++;
 	}
 }
 
 static int			draw_minimap(t_game *game, t_player *player)
 {
-	t_minimap	minimap;
+	t_minimap	*minimap;
 	t_texture	texture;
 
-	minimap.y = (game->data->col_index + 1) * SCALE + SCALE;
-	minimap.x = (game->data->map_width + 1) * SCALE + SCALE;
-	texture.image = mlx_new_image(game->mlx, minimap.x, minimap.y);
+	minimap = &(game->minimap);
+	minimap->y = (game->data->col_index + 1) * SCALE + SCALE;
+	minimap->x = (game->data->map_width + 1) * SCALE + SCALE;
+	if (!(minimap->img = mlx_new_image(game->mlx, minimap->x, minimap->y)))
+		return (free_game(game));
+	texture.image = minimap->img;
 	texture.addr = mlx_get_data_addr(texture.image, &(texture.bpp), &(texture.size_line), &(texture.endian));
 	texture.size_line /= 4;
-	minimap.img = (unsigned int *)texture.addr;
-	minimap.texture = texture;
-	set_minimap_pixels(game, &minimap, player);
+	minimap->cur_img_ptr = (unsigned int *)texture.addr;
+	minimap->texture = texture;
+	set_minimap_pixels(game, minimap, player);
 	mlx_put_image_to_window(game->mlx, game->window, texture.image, 0, 0);
-	mlx_destroy_image(game->mlx, texture.image);
+	mlx_destroy_image(game->mlx, game->minimap.img);
+	game->minimap.img = 0;
 	return (1);
 }
 
@@ -91,7 +95,8 @@ int					ray_casting(t_game *game, t_player *player, t_parse *data)
 	int		x_cur;
 	char	*img_data;
 
-	game->image = mlx_new_image(game->mlx, data->resol[X], data->resol[Y]);
+	if (!(game->image = mlx_new_image(game->mlx, data->resol[X], data->resol[Y])))
+		return (free_game(game));
 	game->addr = mlx_get_data_addr(game->image,
 					&(game->bpp), &(game->size_line), &(game->endian));
 	game->bpp /= 8;
@@ -99,7 +104,6 @@ int					ray_casting(t_game *game, t_player *player, t_parse *data)
 	img_data = game->addr;
 	while (++x_cur < data->resol[X])
 	{
-		// printf("x_cur: %d dda: %p player: %p\n", x_cur, game->dda, player);
 		set_dda_value(game->dda, player, data->resol[X], x_cur);
 		hit_wall(game->dda, data->map, player->pos);
 		set_point(game->dda, data);
@@ -109,5 +113,6 @@ int					ray_casting(t_game *game, t_player *player, t_parse *data)
 	mlx_put_image_to_window(game->mlx, game->window, game->image, 0, 0);
 	draw_minimap(game, game->player);
 	mlx_destroy_image(game->mlx, game->image);
+	game->image = 0;
 	return (1);
 }

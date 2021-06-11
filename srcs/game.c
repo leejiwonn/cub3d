@@ -6,7 +6,7 @@
 /*   By: seujeon <seujeon@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/10 19:41:13 by seujeon           #+#    #+#             */
-/*   Updated: 2021/06/11 15:32:04 by seujeon          ###   ########.fr       */
+/*   Updated: 2021/06/11 20:33:32 by seujeon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,12 +40,14 @@ void		run_game(t_game *game)
 	mlx_loop(game->mlx);
 }
 
-void		free_game(t_game *game)
+int			free_game(t_game *game)
 {
 	if (game->texture)
 		free_texture(game->texture, game->mlx);
 	if (game->data)
 		free_data(game->data);
+	if (game->image)
+		mlx_destroy_image(game->mlx, game->image);
 	if (game->dda)
 		free(game->dda);
 	if (game->player)
@@ -55,6 +57,7 @@ void		free_game(t_game *game)
 	if (game->mlx)
 		free(game->mlx);
 	free(game);
+	return (1);
 }
 
 char		*set_game(t_game **game, char *map_path)

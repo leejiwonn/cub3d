@@ -6,7 +6,7 @@
 /*   By: seujeon <seujeon@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/10 19:42:23 by seujeon           #+#    #+#             */
-/*   Updated: 2021/06/11 16:57:31 by seujeon          ###   ########.fr       */
+/*   Updated: 2021/06/11 20:33:51 by seujeon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,7 +98,7 @@ typedef struct      s_game
 char                *set_game(t_game **game, char *map_path);
 char                *init_game(t_game **game);
 void                run_game(t_game *game);
-void                free_game(t_game *game);
+int					free_game(t_game *game);
 
 char                *set_game_data(t_game *game);
 

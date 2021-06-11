@@ -6,7 +6,7 @@
 /*   By: seujeon <seujeon@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/10 19:41:38 by seujeon           #+#    #+#             */
-/*   Updated: 2021/06/10 23:41:35 by seujeon          ###   ########.fr       */
+/*   Updated: 2021/06/11 20:33:04 by seujeon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,8 @@ int					ray_casting(t_game *game, t_player *player, t_parse *data)
 	int		x_cur;
 	char	*img_data;
 
-	game->image = mlx_new_image(game->mlx, data->resol[X], data->resol[Y]);
+	if (!(game->image = mlx_new_image(game->mlx, data->resol[X], data->resol[Y])))
+		return (free_game(game));
 	game->addr = mlx_get_data_addr(game->image, &(game->bpp), &(game->size_line), &(game->endian));
 	game->bpp /= 8;
 	x_cur = -1;
@@ -67,5 +68,6 @@ int					ray_casting(t_game *game, t_player *player, t_parse *data)
 	}
 	mlx_put_image_to_window(game->mlx, game->window, game->image, 0, 0);
 	mlx_destroy_image(game->mlx, game->image);
+	game->image = 0;
 	return (1);
 }

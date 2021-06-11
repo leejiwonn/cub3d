@@ -45,7 +45,7 @@ BONUS_SRCS		= $(addprefix $(BONUS_SRCS_DIR)/, $(BONUS_SRCS_NAME))
 BONUS_OBJS		= $(BONUS_SRCS:.c=.o)
 
 CC			= gcc
-CFLAGS		= -Wall -Wextra -Werror $(HEADER) -g3 -fsanitize=address
+CFLAGS		= -Wall -Wextra -Werror $(HEADER)
 RM			= rm -rf
 
 TEST_FILE	= beach.cub

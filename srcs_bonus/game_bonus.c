@@ -17,6 +17,7 @@ char		*init_game(t_game **game)
 	(*game)->player = 0;
 	(*game)->dda = 0;
 	(*game)->door.image = 0;
+	ft_memset(&(*game)->minimap, 0, sizeof(t_minimap));
 	if (!set_texture_data((*game)->mlx, "./texture/door.png", &((*game)->door)))
 		return ("mlx_init invalid door file");
 	return (0);
@@ -32,12 +33,14 @@ void		run_game(t_game *game)
 	mlx_loop(game->mlx);
 }
 
-void		free_game(t_game *game)
+int			free_game(t_game *game)
 {
 	if (game->texture)
 		free_texture(game->texture, game->mlx);
 	if (game->door.image)
 		mlx_destroy_image(game->mlx, game->door.image);
+	if (game->minimap.img)
+		mlx_destroy_image(game->mlx, game->minimap.img);
 	if (game->data)
 		free_data(game->data);
 	if (game->dda)
@@ -49,6 +52,7 @@ void		free_game(t_game *game)
 	if (game->mlx)
 		free(game->mlx);
 	free(game);
+	return (1);
 }
 
 char		*set_game(t_game **game, char *map_path)
