@@ -58,6 +58,7 @@ t_texture		**set_texture(void *mlx, char **list)
 	{
 		if (!(texture_info[i] = malloc(sizeof(t_texture))))
 			return (0);
+		ft_memset(texture_info[i], 0, sizeof(t_texture));
 		if (!(set_texture_data(mlx, list[i], texture_info[i])))
 		{
 			free_texture(texture_info, mlx);
