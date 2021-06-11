@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_bonus.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jiwonlee <jiwonlee@student.42seoul.kr>     +#+  +:+       +#+        */
+/*   By: seujeon <seujeon@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/12 02:06:46 by jiwonlee          #+#    #+#             */
-/*   Updated: 2021/06/12 02:07:03 by jiwonlee         ###   ########.fr       */
+/*   Updated: 2021/06/12 04:18:18 by seujeon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,20 +36,15 @@ static char		*set_parse(t_parse *data, char *line, char *flags)
 	int		flag;
 	int		check_full;
 
-	if (!ft_strlen(line))
-	{
-		free(line);
-		return (0);
-	}
 	flag = get_flag(line);
 	check_full = is_full(flags);
-	if (!check_full && flag == FLAG_NOT)
-		return ("invalid identifier");
 	if ((!check_full && !*line) || (check_full && !*line && !*data->map))
 	{
 		free(line);
 		return (0);
 	}
+	if (!check_full && flag == FLAG_NOT)
+		return ("invalid identifier");
 	if (!check_full)
 	{
 		if (flags[flag] == 1)
