@@ -13,6 +13,10 @@ int			key_press(int keycode, t_game *game)
 		game->player->key[3] = 1;
 	if (keycode == KEY_LEFT || keycode == KEY_RIGHT)
 		game->player->key[keycode - 119] = 1;
+	if (keycode == KEY_P && game->player->key[MOUSE_TOGGLE])
+		game->player->key[MOUSE_TOGGLE] = 0;
+	else if (keycode == KEY_P && !game->player->key[MOUSE_TOGGLE])
+		game->player->key[MOUSE_TOGGLE] = 1;
 	return (0);
 }
 
@@ -73,7 +77,7 @@ int			main_loop(t_game *game)
 		is_active = rotate_player(game->player, (PI / HALF_CYCLE) * 1.5);
 	else if (game->player->key[RIGHT] == 1)
 		is_active = rotate_player(game->player, (PI / HALF_CYCLE) * -1.5);
-	if (game->player->key[MOUSE_MOVE] == 1)
+	if (game->player->key[MOUSE_TOGGLE] && game->player->key[MOUSE_MOVE] == 1)
 		is_active = rotate_mouse(game);
 	if (game->player->key[SPACE] == 1)
 		is_active = activate_door(game, game->player);

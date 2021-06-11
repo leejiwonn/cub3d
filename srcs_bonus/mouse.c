@@ -16,8 +16,6 @@ int			rotate_mouse(t_game *game)
 	int center_y;
 	int	move_offset;
 
-	if (game->player->key[MOUSE_MOVE] == 0)
-		return (0);
 	game->player->key[MOUSE_MOVE] = 0;
 	center_x = game->data->resol[X] / 2;
 	center_y = game->data->resol[Y] / 2;

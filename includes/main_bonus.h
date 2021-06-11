@@ -34,6 +34,7 @@
 # define KEY_ESC 53
 # define KEY_LEFT 123
 # define KEY_RIGHT 124
+# define KEY_P 35
 
 # define A 0
 # define S 1
@@ -43,6 +44,7 @@
 # define RIGHT 5
 # define MOUSE_MOVE 6
 # define SPACE 7
+# define MOUSE_TOGGLE 8
 
 # define SCALE 10
 
@@ -64,7 +66,7 @@ typedef struct      s_minimap
 	char			*img;
     unsigned int	*cur_img_ptr;
     unsigned int	*line;
-    t_texture texture;
+    t_texture		texture;
 }                   t_minimap;
 
 typedef struct      s_player
@@ -72,7 +74,7 @@ typedef struct      s_player
     double          pos[2];
     double          dir[2];
     double          plane[2];
-    int             key[8];
+    int             key[9];
 	int				mouse_x;
 }                   t_player;
 
