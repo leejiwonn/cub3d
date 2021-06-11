@@ -6,7 +6,7 @@
 /*   By: seujeon <seujeon@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/10 20:12:37 by seujeon           #+#    #+#             */
-/*   Updated: 2021/06/11 19:47:12 by seujeon          ###   ########.fr       */
+/*   Updated: 2021/06/11 21:40:42 by seujeon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,6 @@ static void		error_print(t_game *game, char *error_msg)
 		free_game(game);
 	printf("Error\n");
 	printf("Message : %s\n", error_msg);
-	while(1)
 	exit(1);
 }
 
