@@ -6,7 +6,7 @@
 /*   By: jiwonlee <jiwonlee@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/12 02:02:45 by jiwonlee          #+#    #+#             */
-/*   Updated: 2021/06/12 02:02:57 by jiwonlee         ###   ########.fr       */
+/*   Updated: 2021/06/12 02:24:33 by jiwonlee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,17 +50,17 @@ void		free_list(t_door_list *head)
 	}
 }
 
-void		add_list(t_door_list **head, t_door_list *new)
+void		add_list(t_door_list **head, t_door_list *new_list)
 {
 	t_door_list	*cur;
 
 	cur = *head;
 	if (!cur)
-		*head = new;
+		*head = new_list;
 	else
 	{
 		while ((cur)->next)
 			cur = cur->next;
-		cur->next = new;
+		cur->next = new_list;
 	}
 }

@@ -6,7 +6,7 @@
 /*   By: seujeon <seujeon@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/10 19:42:40 by seujeon           #+#    #+#             */
-/*   Updated: 2021/06/11 00:56:19 by seujeon          ###   ########.fr       */
+/*   Updated: 2021/06/12 02:35:07 by jiwonlee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,39 +28,39 @@
 # define FLAG_C 5
 # define FLAG_NOT 6
 
-typedef struct      s_color
+typedef struct		s_color
 {
 	unsigned char	a;
 	unsigned char	r;
 	unsigned char	g;
 	unsigned char	b;
-}                   t_color;
+}					t_color;
 
-typedef struct  s_parse
+typedef struct		s_parse
 {
-	int			resol[2];
-	int			col_index;
-	int			map_width;
-	int			location[2];
-	t_color		color[2];
-	int			col_end;
-	char		direction;
-	char		**map;
-	char		**texture;
-}               t_parse;
+	int				resol[2];
+	int				col_index;
+	int				map_width;
+	int				location[2];
+	t_color			color[2];
+	int				col_end;
+	char			direction;
+	char			**map;
+	char			**texture;
+}					t_parse;
 
-char			*parse(t_parse **data, char *map_path);
-void			free_data(t_parse *data);
-int				get_flag(char *line);
-int				is_full(char *flags);
-void			ft_memset(void *s, int c, size_t n);
+char				*parse(t_parse **data, char *map_path);
+void				free_data(t_parse *data);
+int					get_flag(char *line);
+int					is_full(char *flags);
+void				ft_memset(void *s, int c, size_t n);
 
-char			*set_map(t_parse *data, char *line);
-char			*resize_map(t_parse *data, int check_flags);
-char			*map_validation(t_parse *data, int max);
+char				*set_map(t_parse *data, char *line);
+char				*resize_map(t_parse *data, int check_flags);
+char				*map_validation(t_parse *data, int max);
 
-char			*set_identifier(t_parse *data, char *line, int flag);
-int				set_wall_texture_path(char **target, char **line);
-int				parse_atoi(char **line, int *target);
+char				*set_identifier(t_parse *data, char *line, int flag);
+int					set_wall_texture_path(char **target, char **line);
+int					parse_atoi(char **line, int *target);
 
 #endif
