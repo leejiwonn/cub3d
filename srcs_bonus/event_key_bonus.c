@@ -74,7 +74,7 @@ int			main_loop(t_game *game)
 	else if (game->player->key[RIGHT] == 1)
 		is_active = rotate_player(game->player, (PI / HALF_CYCLE) * -1.5);
 	if (game->player->key[MOUSE_MOVE] == 1)
-		is_active = 1;
+		is_active = rotate_mouse(game);
 	if (game->player->key[SPACE] == 1)
 		is_active = activate_door(game, game->player);
 	if (is_active)

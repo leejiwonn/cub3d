@@ -29,7 +29,7 @@ void		run_game(t_game *game)
 	mlx_hook(game->window, 3, 0, key_release, game);
 	mlx_hook(game->window, 17, 0, key_exit, game);
 	mlx_loop_hook(game->mlx, main_loop, game);
-	mlx_hook(game->window, MOUSE_MOVE, 0, rotate_mouse, game);
+	mlx_hook(game->window, MOUSE_MOVE, 0, proc_mouse_event, game);
 	mlx_loop(game->mlx);
 }
 

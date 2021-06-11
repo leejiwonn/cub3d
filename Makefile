@@ -39,7 +39,8 @@ BONUS_SRCS_NAME	= main_bonus.c \
 				parse_bonus.c \
 				raycasting_bonus.c \
 				raycasting_utils_bonus.c \
-				door_list_bonus.c
+				door_list_bonus.c \
+				mouse.c
 
 BONUS_SRCS		= $(addprefix $(BONUS_SRCS_DIR)/, $(BONUS_SRCS_NAME))
 BONUS_OBJS		= $(BONUS_SRCS:.c=.o)

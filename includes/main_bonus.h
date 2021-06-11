@@ -73,6 +73,7 @@ typedef struct      s_player
     double          dir[2];
     double          plane[2];
     int             key[8];
+	int				mouse_x;
 }                   t_player;
 
 typedef struct      s_dda
@@ -121,7 +122,6 @@ t_player            *set_player(int *location, char dir);
 char                rotate_player(t_player *player, double seta);
 char                move_ws(t_player *player, char **worldmap, double scale);
 char                move_ad(t_player *player, char **worldmap, double scale);
-int					rotate_mouse(int x, int y, t_game *game);
 
 int                 ray_casting(t_game *game, t_player *player, t_parse *data);
 unsigned int        set_color(char **worldmap, int x, int y, int side);
@@ -139,5 +139,8 @@ int					is_door_pos(int x, int y, t_game *game);
 t_door_list			*create_door_list(int x, int y);
 void				free_list(t_door_list *head);
 void				add_list(t_door_list **head, t_door_list *new);
+
+int					rotate_mouse(t_game *game);
+int					proc_mouse_event(int x, int y, t_game *game);
 
 #endif

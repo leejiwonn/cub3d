@@ -1,25 +1,5 @@
 #include "main_bonus.h"
 
-int			rotate_mouse(int x, int y, t_game *game)
-{
-	int	center_x;
-	int	center_y;
-
-	y = 0;
-	center_x = game->data->resol[X] / 2;
-	center_y = game->data->resol[Y] / 2;
-	mlx_mouse_hide();
-	game->player->key[MOUSE_MOVE] = 1;
-	if (x < center_x)
-		rotate_player(game->player, (PI / HALF_CYCLE) * 5);
-	else if (x > center_x)
-		rotate_player(game->player, (PI / HALF_CYCLE) * -5);
-	else
-		game->player->key[MOUSE_MOVE] = 0;
-	mlx_mouse_move(game->window, center_x, center_y);
-	return (game->player->key[MOUSE_MOVE]);
-}
-
 char			move_ws(t_player *player, char **worldmap, double scale)
 {
 	double	*pos;
@@ -90,7 +70,7 @@ t_player		*set_player(int *location, char dir)
 
 	if (!(player = malloc(sizeof(t_player))))
 		return (0);
-	ft_memset(player->key, 0, sizeof(int) * 8);
+	ft_memset(player->key, 0, sizeof(int) * 9);
 	player->pos[X] = (double)(location[X]);
 	player->pos[Y] = (double)(location[Y]);
 	player->dir[X] = 0;
