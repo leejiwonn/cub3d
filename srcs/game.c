@@ -14,8 +14,6 @@
 
 char		*init_game(t_game **game)
 {
-	if (!(*game = malloc(sizeof(t_game))))
-		return ("game malloc failed");
 	if (!((*game)->mlx = mlx_init()))
 		return ("mlx_init failed");
 	(*game)->window = 0;
@@ -54,19 +52,16 @@ int			free_game(t_game *game)
 		free(game->player);
 	if (game->window)
 		mlx_destroy_window(game->mlx, game->window);
-	if (game->mlx)
-		free(game->mlx);
-	free(game);
 	return (1);
 }
 
-char		*set_game(t_game **game, char *map_path)
+char		*set_game(t_game *game, char *map_path)
 {
 	char	*error_msg;
 
-	if ((error_msg = init_game(game)))
+	if ((error_msg = init_game(&game)))
 		return (error_msg);
-	if ((error_msg = parse(&(*game)->data, map_path)))
+	if ((error_msg = parse(&(game)->data, map_path)))
 		return (error_msg);
-	return (set_game_data(*game));
+	return (set_game_data(game));
 }
