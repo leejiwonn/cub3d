@@ -6,7 +6,7 @@
 /*   By: seujeon <seujeon@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/10 19:41:31 by seujeon           #+#    #+#             */
-/*   Updated: 2021/06/10 19:41:31 by seujeon          ###   ########.fr       */
+/*   Updated: 2021/06/12 01:39:07 by jiwonlee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,7 +93,7 @@ int		is_full(char *flags)
 
 void	ft_memset(void *s, int c, size_t n)
 {
-	size_t  i;
+	size_t	i;
 
 	i = 0;
 	while (i < n)

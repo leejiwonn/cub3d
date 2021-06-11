@@ -6,7 +6,7 @@
 /*   By: seujeon <seujeon@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/10 19:41:27 by seujeon           #+#    #+#             */
-/*   Updated: 2021/06/10 19:41:27 by seujeon          ###   ########.fr       */
+/*   Updated: 2021/06/12 01:38:27 by jiwonlee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 
 static int	check_around(char **map, int col, int row)
 {
-	int	i;
-	int	j;
+	int		i;
+	int		j;
 
 	i = -2;
 	while (++i < 2)

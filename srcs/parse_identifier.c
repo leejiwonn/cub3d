@@ -6,7 +6,7 @@
 /*   By: seujeon <seujeon@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/10 19:41:23 by seujeon           #+#    #+#             */
-/*   Updated: 2021/06/10 23:06:20 by seujeon          ###   ########.fr       */
+/*   Updated: 2021/06/12 01:36:47 by jiwonlee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,10 @@
 
 static int		is_png_file(char *path, int len)
 {
-	int	i;
+	int		i;
 
 	i = 0;
-	path += len - 4;					
+	path += len - 4;
 	if (path[i] != '.')
 		return (0);
 	i++;
@@ -74,7 +74,7 @@ static char		*set_color(t_parse *data, char *line, int flag)
 
 int				set_wall_texture_path(char **target, char **line)
 {
-	int	i;
+	int		i;
 
 	if (!(*target = malloc(ft_strlen(*line) + 1)))
 		return (0);
@@ -88,7 +88,7 @@ int				set_wall_texture_path(char **target, char **line)
 	return (1);
 }
 
-char		*set_identifier(t_parse *data, char *line, int flag)
+char			*set_identifier(t_parse *data, char *line, int flag)
 {
 	char	*line_cur;
 	char	*error_msg;

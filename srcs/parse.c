@@ -6,7 +6,7 @@
 /*   By: seujeon <seujeon@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/10 19:41:33 by seujeon           #+#    #+#             */
-/*   Updated: 2021/06/11 21:43:00 by seujeon          ###   ########.fr       */
+/*   Updated: 2021/06/12 01:33:18 by jiwonlee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,7 +77,7 @@ char			*parse(t_parse **data, char *map_path)
 		if ((result = get_next_line(fd, &line)) == -1)
 			return ("get_next_line failed");
 		if (!result && !*line)
-			break;
+			break ;
 		if ((error_msg = set_parse(*data, line, flags)))
 			return (error_msg);
 	}

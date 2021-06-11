@@ -6,7 +6,7 @@
 /*   By: seujeon <seujeon@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/10 19:41:35 by seujeon           #+#    #+#             */
-/*   Updated: 2021/06/10 19:41:35 by seujeon          ###   ########.fr       */
+/*   Updated: 2021/06/12 01:41:06 by jiwonlee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,8 @@ char	*get_texture_start(t_texture **texture, t_dda *dda)
 		dda->cur = texture[FLAG_NO];
 	dda->cur->ratio_y = (double)(dda->cur->len[HEIGHT] - 1);
 	dda->cur->ratio_y /= (double)(dda->point[DOWN] - dda->point[UP] + 1);
-	pixel_offset = (int)(dda->wall_x * (dda->cur->len[WIDTH] - 1)) * dda->cur->bpp;
+	pixel_offset = (int)(dda->wall_x * (dda->cur->len[WIDTH] - 1))
+		* dda->cur->bpp;
 	return (dda->cur->addr + pixel_offset);
 }
 
