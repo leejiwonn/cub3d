@@ -6,7 +6,7 @@
 /*   By: seujeon <seujeon@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/10 19:42:23 by seujeon           #+#    #+#             */
-/*   Updated: 2021/06/11 14:43:19 by seujeon          ###   ########.fr       */
+/*   Updated: 2021/06/11 14:50:03 by seujeon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,8 @@
 
 # define PI 3.14
 # define HALF_CYCLE 180
+
+# define MOVE_SCALE 0.3
 
 # define UP 0
 # define DOWN 1

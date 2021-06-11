@@ -6,7 +6,7 @@
 /*   By: seujeon <seujeon@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/10 19:41:11 by seujeon           #+#    #+#             */
-/*   Updated: 2021/06/10 19:41:12 by seujeon          ###   ########.fr       */
+/*   Updated: 2021/06/11 14:50:31 by seujeon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,13 +52,13 @@ int			main_loop(t_game *game)
 
 	is_active = 0;
 	if (game->player->key[A] == 1)
-		is_active = move_ad(game->player, game->data->map, 0.3);
+		is_active = move_ad(game->player, game->data->map, MOVE_SCALE);
 	else if (game->player->key[D] == 1)
-		is_active = move_ad(game->player, game->data->map, -0.3);
+		is_active = move_ad(game->player, game->data->map, -MOVE_SCALE);
 	if (game->player->key[S] == 1)
-		is_active = move_ws(game->player, game->data->map, -0.3);
+		is_active = move_ws(game->player, game->data->map, -MOVE_SCALE);
 	else if (game->player->key[W] == 1)
-		is_active = move_ws(game->player, game->data->map, 0.3);
+		is_active = move_ws(game->player, game->data->map, MOVE_SCALE);
 	if (game->player->key[LEFT] == 1)
 		is_active = rotate_player(game->player, (PI / HALF_CYCLE) * 1.5);
 	else if (game->player->key[RIGHT] == 1)
