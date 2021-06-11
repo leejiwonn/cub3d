@@ -6,7 +6,7 @@
 /*   By: seujeon <seujeon@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/10 19:41:44 by seujeon           #+#    #+#             */
-/*   Updated: 2021/06/11 14:53:19 by seujeon          ###   ########.fr       */
+/*   Updated: 2021/06/11 20:37:14 by seujeon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,6 +70,7 @@ t_player		*set_player(int *location, char dir)
 
 	if (!(player = malloc(sizeof(t_player))))
 		return (0);
+	ft_memset(player->key, 0, sizeof(int) * 6);
 	player->pos[X] = (double)(location[X]);
 	player->pos[Y] = (double)(location[Y]);
 	player->dir[X] = 0;

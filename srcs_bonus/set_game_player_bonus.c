@@ -11,9 +11,9 @@ int			rotate_mouse(int x, int y, t_game *game)
 	mlx_mouse_hide();
 	game->player->key[MOUSE_MOVE] = 1;
 	if (x < center_x)
-		rotate_player(game->player, (PI / HALF_CYCLE) * 1.5);
+		rotate_player(game->player, (PI / HALF_CYCLE) * 5);
 	else if (x > center_x)
-		rotate_player(game->player, (PI / HALF_CYCLE) * -1.5);
+		rotate_player(game->player, (PI / HALF_CYCLE) * -5);
 	else
 		game->player->key[MOUSE_MOVE] = 0;
 	mlx_mouse_move(game->window, center_x, center_y);
@@ -90,6 +90,7 @@ t_player		*set_player(int *location, char dir)
 
 	if (!(player = malloc(sizeof(t_player))))
 		return (0);
+	ft_memset(player->key, 0, sizeof(int) * 8);
 	player->pos[X] = (double)(location[X]);
 	player->pos[Y] = (double)(location[Y]);
 	player->dir[X] = 0;
